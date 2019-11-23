@@ -1,4 +1,4 @@
-# Java destop application for restaurant.
+# Java desktop application for restaurant.
 
 
 #### How to install:
