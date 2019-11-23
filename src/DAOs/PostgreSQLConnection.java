@@ -8,6 +8,8 @@ package DAOs;
 import java.sql.DriverManager;
 import java.sql.Connection;
 import java.sql.SQLException;
+import Utils.GlobalVariables;
+import java.sql.PreparedStatement;
 
 /**
  *
@@ -15,17 +17,42 @@ import java.sql.SQLException;
  */
 public class PostgreSQLConnection {
 
-    private static final String url = "jdbc:postgresql://localhost:5432/JavaRestaurantPOS";
-    private static final String user = "javaApplication";
-    private static final String password = "javajava";
-
     public static void main(String[] args) {
-        try{
-        Connection conn = DriverManager.getConnection(url, user, password);
-        System.out.println("Connected to the PostgreSQL server successfully.");
-        }catch(SQLException e){
-            System.out.println(e.getMessage());
-        }
-        
+
+        PostgreSQLConnection postgreSQL = new PostgreSQLConnection();
+
+        postgreSQL.connect();
+
     }
+
+    public static Connection connect() {
+
+        Connection conn = null;
+
+        try {
+
+            conn = DriverManager.getConnection(
+                    GlobalVariables.DB_URL + GlobalVariables.DB_NAME,
+                    GlobalVariables.DB_USER,
+                    GlobalVariables.DB_PASSWORD);
+
+            //System.out.println("Connected to the PostgreSQL server successfully.");
+
+        } catch (SQLException e) {
+
+            System.err.println(e.getMessage());
+        }
+
+        return conn;
+    }
+
+    public static void close(Connection conn, PreparedStatement stmt) {
+        try {
+            stmt.close();
+            conn.close();
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+    }
+
 }
