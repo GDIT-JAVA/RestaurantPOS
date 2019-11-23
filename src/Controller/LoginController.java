@@ -17,23 +17,17 @@ import java.util.logging.Logger;
  * @author PPuarat
  */
 public class LoginController {
-    
-    public boolean login(String username, char[] password){
-        
+
+    public boolean login(String username, char[] password) {
+
         //System.out.println(username +" "+ password);
-        
         UserDAO userDAO = new UserDAO();
-        
+
         ArrayList<User> users;
-        
-        
-        try {
-            users = userDAO.search(username, String.valueOf(password));
-            if(!users.isEmpty()){
-                return true;
-            }
-        } catch (SQLException ex) {
-            System.err.println(ex.getMessage());
+
+        users = userDAO.search(username, String.valueOf(password));
+        if (!users.isEmpty()) {
+            return true;
         }
         return false;
     }

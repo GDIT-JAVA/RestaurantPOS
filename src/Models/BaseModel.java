@@ -15,18 +15,4 @@ public class BaseModel {
     protected long id;
     protected String createdAt;
     protected boolean isActive;
-
-    public long getId() {
-        return id;
-    }
-    
-    public String getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(String createdAt) {
-        this.createdAt = createdAt;
-    }
-    
-    
 }

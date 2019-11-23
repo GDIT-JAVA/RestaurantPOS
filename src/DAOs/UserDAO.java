@@ -9,7 +9,6 @@ import Models.User;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.sql.PreparedStatement;
 import java.util.ArrayList;
 
@@ -21,51 +20,65 @@ public class UserDAO {
 
     private final static String TABLE = "users";
 
-    public ArrayList<User> searchAll() throws SQLException {
+    public ArrayList<User> searchAll() {
 
-        ArrayList<User> users;
-        Connection conn = PostgreSQLConnection.connect();
+        ArrayList<User> users = new ArrayList<>();
+        try {
 
-        String SQL = "SELECT * FROM " + TABLE + "WHERE is_active = true;";
+            Connection conn = PostgreSQLConnection.connect();
 
-        PreparedStatement stmt = conn.prepareStatement(SQL);
-        ResultSet rs = stmt.executeQuery();
+            String SQL = "SELECT * FROM " + TABLE + " WHERE is_active = true;";
 
-        users = this.mapUsers(rs);
+            PreparedStatement stmt = conn.prepareStatement(SQL);
+            ResultSet rs = stmt.executeQuery();
 
-        PostgreSQLConnection.close(conn,stmt);
+            users = this.map(rs);
 
+            PostgreSQLConnection.close(conn, stmt);
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
         return users;
     }
 
-    public ArrayList<User> search(String username, String password) throws SQLException {
+    /**
+     * @param username
+     * @param password
+     */
+    public ArrayList<User> search(String username, String password) {
 
-        ArrayList<User> users;
-        Connection conn = PostgreSQLConnection.connect();
+        ArrayList<User> users = new ArrayList<>();
+        try {
 
-        String SQL = "SELECT * FROM " + TABLE + "WHERE is_active = true "
-                + "and user_name = ? and password = ? ;";
+            Connection conn = PostgreSQLConnection.connect();
 
-        PreparedStatement stmt = conn.prepareStatement(SQL);
-        stmt.setString(1, username);
-        stmt.setString(2, password);
-        ResultSet rs = stmt.executeQuery();
+            String SQL = "SELECT * FROM " + TABLE + " WHERE is_active = true "
+                    + "and user_name = ? and password = ? ;";
 
-        users = this.mapUsers(rs);
+            PreparedStatement stmt = conn.prepareStatement(SQL);
+            stmt.setString(1, username);
+            stmt.setString(2, password);
+            //Check query
+            System.out.println(stmt);
+            ResultSet rs = stmt.executeQuery();
 
-        PostgreSQLConnection.close(conn, stmt);
-
+            users = this.map(rs);
+            PostgreSQLConnection.close(conn, stmt);
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
         return users;
     }
 
-    private ArrayList<User> mapUsers(ResultSet rs) throws SQLException {
+    private ArrayList<User> map(ResultSet rs) throws SQLException {
 
         ArrayList<User> users = new ArrayList<>();
 
         while (rs.next()) {
 
             User user = new User();
-
+            
+            user.setId(rs.getLong("id"));
             user.setUserName(rs.getString("user_name"));
             user.setPassword(rs.getString("password"));
             user.setFirstName(rs.getString("first_name"));
@@ -73,9 +86,11 @@ public class UserDAO {
             user.setPhone(rs.getString("phone"));
             user.setEmail(rs.getString("email"));
             user.setCreatedAt(rs.getString("created_at"));
+            user.setIsActive(rs.getBoolean("is_active"));
 
             users.add(user);
         }
+
         return users;
     }
 }

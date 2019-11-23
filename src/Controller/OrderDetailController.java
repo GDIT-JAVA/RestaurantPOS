@@ -3,38 +3,34 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Utils;
+package Controller;
 
 import DAOs.FoodDAO;
 import DAOs.FoodTypeDAO;
 import Models.Food;
 import Models.FoodType;
-import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
  * @author PPuarat
  */
-public class Testing {
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) throws SQLException {
-
-        // TODO code application logic here
+public class OrderDetailController {
+    
+    public Map<String, ArrayList> loadFoods(){
         FoodTypeDAO foodTypeDAO = new FoodTypeDAO();
+        
         ArrayList<FoodType> foodTypes = foodTypeDAO.searchAll();
-        System.out.println("Utils.Testing.main()");
         FoodDAO foodDAO = new FoodDAO(foodTypes);
+        
         ArrayList<Food> foods = foodDAO.searchAll();
-
-        for (Food food : foods) {
-
-            System.out.println(food.getFoodName() + " " + food.getFoodType().getTypeName());
-        }
-
+        
+        Map<String, ArrayList> map = new HashMap();
+        map.put("foodTypes", foodTypes);
+        map.put("foods", foods);
+        
+        return map;
     }
-
 }

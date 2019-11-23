@@ -10,7 +10,7 @@ CREATE TABLE "users" (
   "is_active" boolean
 );
 
-CREATE TABLE "foodTypes" (
+CREATE TABLE "food_types" (
   "id" SERIAL PRIMARY KEY,
   "type_name" varchar,
   "description" varchar,
@@ -48,7 +48,7 @@ CREATE TABLE "orders" (
   "is_active" boolean
 );
 
-CREATE TABLE "orderDetail" (
+CREATE TABLE "order_detail" (
   "id" SERIAL PRIMARY KEY,
   "order_id" int,
   "food_id" int,
@@ -92,4 +92,6 @@ ALTER TABLE "coupons" ADD FOREIGN KEY ("customer_id") REFERENCES "customers" ("i
 ALTER TABLE "coupons" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
 
 ALTER TABLE users ADD CONSTRAINT users_username_unq UNIQUE (user_name);
+
+
 
