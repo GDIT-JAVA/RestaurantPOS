@@ -59,7 +59,7 @@ public class UserDAO {
             stmt.setString(1, username);
             stmt.setString(2, password);
             //Check query
-            System.out.println(stmt);
+            //System.out.println(stmt);
             ResultSet rs = stmt.executeQuery();
 
             users = this.map(rs);

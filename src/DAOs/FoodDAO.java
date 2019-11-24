@@ -22,7 +22,7 @@ public class FoodDAO {
 
     private final static String TABLE = "foods";
     private ArrayList<FoodType> foodTypes;
-    
+
     public FoodDAO(ArrayList<FoodType> foodTypes) {
         this.foodTypes = foodTypes;
         System.out.println("DAOs.FoodDAO.<init>()");
@@ -43,15 +43,38 @@ public class FoodDAO {
             foods = this.map(rs);
 
             PostgreSQLConnection.close(conn, stmt);
-            
+
         } catch (SQLException e) {
-            
+
             System.err.println(e.getMessage());
-            
+
         }
 
         return foods;
 
+    }
+
+    public ArrayList<Food> searchByFoodType(Long foodTypeId) {
+
+        ArrayList<Food> foods = new ArrayList<>();
+        try {
+            Connection conn = PostgreSQLConnection.connect();
+
+            String SQL = "SELECT * FROM " + TABLE + " WHERE is_active = true "
+                    + " and type_id = ?;";
+
+            PreparedStatement stmt = conn.prepareStatement(SQL);
+            stmt.setLong(1, foodTypeId);
+            ResultSet rs = stmt.executeQuery();
+
+            foods = this.map(rs);
+
+            PostgreSQLConnection.close(conn, stmt);
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+
+        }
+        return foods;
     }
 
     private ArrayList<Food> map(ResultSet rs) throws SQLException {
@@ -75,15 +98,15 @@ public class FoodDAO {
 
         return foods;
     }
-    
-    private FoodType mapFoodType(long foodTypeId){
-        
-        for(FoodType foodType:this.foodTypes){
-            if(foodType.getId() == foodTypeId){
+
+    private FoodType mapFoodType(long foodTypeId) {
+
+        for (FoodType foodType : this.foodTypes) {
+            if (foodType.getId() == foodTypeId) {
                 return foodType;
             }
         }
-        
+
         return null;
     }
 }

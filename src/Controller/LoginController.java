@@ -24,11 +24,11 @@ public class LoginController {
         UserDAO userDAO = new UserDAO();
 
         ArrayList<User> users;
-
-        users = userDAO.search(username, String.valueOf(password));
-        if (!users.isEmpty()) {
-            return true;
-        }
-        return false;
+        return true; // bypass login
+//        users = userDAO.search(username, String.valueOf(password));
+//        if (!users.isEmpty()) {
+//            return true;
+//        }
+//        return false;
     }
 }

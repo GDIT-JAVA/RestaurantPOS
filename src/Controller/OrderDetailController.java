@@ -18,19 +18,22 @@ import java.util.Map;
  * @author PPuarat
  */
 public class OrderDetailController {
-    
-    public Map<String, ArrayList> loadFoods(){
+
+    public Map<String, ArrayList<Food>> loadFoods() {
         FoodTypeDAO foodTypeDAO = new FoodTypeDAO();
-        
+
         ArrayList<FoodType> foodTypes = foodTypeDAO.searchAll();
         FoodDAO foodDAO = new FoodDAO(foodTypes);
-        
+
         ArrayList<Food> foods = foodDAO.searchAll();
-        
-        Map<String, ArrayList> map = new HashMap();
-        map.put("foodTypes", foodTypes);
-        map.put("foods", foods);
-        
+
+        Map<String, ArrayList<Food>> map = new HashMap();
+
+        for (int i = 0; i < foodTypes.size(); i++) {
+            map.put(foodTypes.get(i).getTypeName(),
+                    foodDAO.searchByFoodType(foodTypes.get(i).getId()));
+
+        }
         return map;
     }
 }
