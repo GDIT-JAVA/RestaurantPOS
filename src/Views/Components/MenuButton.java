@@ -5,6 +5,9 @@
  */
 package Views.Components;
 
+import Utils.Settings;
+import java.awt.Color;
+
 /**
  *
  * @author PPuarat
@@ -14,8 +17,12 @@ public class MenuButton extends javax.swing.JButton {
     public MenuButton(String text) {
         super(text);
         this.setBorder(null);
+        //this.setBackground(new Color(100, 100, 241));
         this.setPreferredSize(new java.awt.Dimension(110, 70));
-        this.setFont(new java.awt.Font("Tahoma", 0, 30));
+        this.setFont(new java.awt.Font(Settings.FONT, 0, 30));
+        this.setBorderPainted(false);
+        this.setFocusPainted(false);
+        //this.setContentAreaFilled(false);
     }
-    
+
 }

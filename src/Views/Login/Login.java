@@ -6,7 +6,7 @@
 package Views.Login;
 
 import Controller.LoginController;
-import Utils.GlobalVariables;
+import Utils.Settings;
 import Views.Components.ConfirmButton;
 import java.awt.Component;
 import javax.swing.JOptionPane;
@@ -132,10 +132,11 @@ public class Login extends javax.swing.JPanel {
         boolean loginResult = loginCon.login(
                 txtUsername.getText(),
                 txtPassword.getPassword());
+        
         if (loginResult) {
             
             JOptionPane.showMessageDialog(null, 
-                    "Welcome to " + GlobalVariables.PROGRAM_NAME + 
+                    "Welcome to " + Settings.PROGRAM_NAME + 
                             " please press ok to continue.",
                     "Welcome",
                     JOptionPane.INFORMATION_MESSAGE);
@@ -153,10 +154,12 @@ public class Login extends javax.swing.JPanel {
             this.resetText();
         }
     }//GEN-LAST:event_btnLoginActionPerformed
+    
     private void resetText() {
         txtUsername.setText("");
         txtPassword.setText("");
     }
+    
     private javax.swing.JPanel basePanel;
     private javax.swing.JPanel appPanel;
     private LoginController loginCon;

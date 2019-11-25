@@ -47,7 +47,7 @@ public class FoodDAO {
         } catch (SQLException e) {
 
             System.err.println(e.getMessage());
-
+            e.printStackTrace();
         }
 
         return foods;
@@ -72,7 +72,7 @@ public class FoodDAO {
             PostgreSQLConnection.close(conn, stmt);
         } catch (SQLException e) {
             System.err.println(e.getMessage());
-
+            e.printStackTrace();
         }
         return foods;
     }

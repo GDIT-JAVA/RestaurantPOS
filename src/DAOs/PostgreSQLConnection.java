@@ -8,7 +8,7 @@ package DAOs;
 import java.sql.DriverManager;
 import java.sql.Connection;
 import java.sql.SQLException;
-import Utils.GlobalVariables;
+import Utils.Settings;
 import java.sql.PreparedStatement;
 
 /**
@@ -19,9 +19,8 @@ public class PostgreSQLConnection {
 
     public static void main(String[] args) {
 
-        PostgreSQLConnection postgreSQL = new PostgreSQLConnection();
 
-        postgreSQL.connect();
+        PostgreSQLConnection.connect();
 
     }
 
@@ -31,10 +30,9 @@ public class PostgreSQLConnection {
 
         try {
 
-            conn = DriverManager.getConnection(
-                    GlobalVariables.DB_URL + GlobalVariables.DB_NAME,
-                    GlobalVariables.DB_USER,
-                    GlobalVariables.DB_PASSWORD);
+            conn = DriverManager.getConnection(Settings.DB_URL + Settings.DB_NAME,
+                    Settings.DB_USER,
+                    Settings.DB_PASSWORD);
 
             //System.out.println("Connected to the PostgreSQL server successfully.");
 
@@ -52,6 +50,7 @@ public class PostgreSQLConnection {
             conn.close();
         } catch (SQLException e) {
             System.err.println(e.getMessage());
+            e.printStackTrace();
         }
     }
 

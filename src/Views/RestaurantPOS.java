@@ -46,7 +46,7 @@ public class RestaurantPOS extends javax.swing.JFrame {
         setResizable(false);
         setSize(new java.awt.Dimension(1200, 675));
 
-        basePanel.setLayout(new java.awt.GridLayout());
+        basePanel.setLayout(new java.awt.GridLayout(1, 0));
         getContentPane().add(basePanel, java.awt.BorderLayout.CENTER);
 
         pack();

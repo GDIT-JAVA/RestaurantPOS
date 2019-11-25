@@ -37,6 +37,7 @@ public class FoodTypeDAO {
             PostgreSQLConnection.close(conn, stmt);
         } catch (SQLException e) {
             System.err.println(e.getMessage());
+            e.printStackTrace();
         }
         
         return foodTypes;

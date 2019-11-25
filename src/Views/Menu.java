@@ -6,6 +6,7 @@
 package Views;
 
 import Views.Components.MenuButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -14,17 +15,17 @@ import javax.swing.JPanel;
  */
 public class Menu extends javax.swing.JPanel {
 
-    private JPanel JPanel1;
-    private javax.swing.JButton newOrder;
-    private javax.swing.JButton orders;
-    private javax.swing.JButton reports;
-    private javax.swing.JButton settings;
+    private JPanel appPanel;
+    private javax.swing.JButton btnNewOrder;
+    private javax.swing.JButton btnOrders;
+    private javax.swing.JButton btnReports;
+    private javax.swing.JButton btnSettings;
 
     /**
      * Creates new form Menu
      */
     public Menu(JPanel inputJP) {
-        JPanel1 = inputJP;
+        appPanel = inputJP;
         initComponents();
         init();
     }
@@ -43,30 +44,43 @@ public class Menu extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
     private void btnActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
-        JPanel1.setBackground(new java.awt.Color(
-                (int) (Math.random() * 255),
-                (int) (Math.random() * 255),
-                (int) (Math.random() * 255)));
-
+        JOptionPane.showMessageDialog(null, "Menu bar Clicked!");
+        
     }
 
     private void init() {
-        newOrder = new MenuButton("New Order");
-        newOrder.addActionListener(new java.awt.event.ActionListener() {
+        btnNewOrder = new MenuButton("New Order");
+        btnNewOrder.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnActionPerformed(evt);
             }
         });
-        add(newOrder);
         
-        orders = new MenuButton("Orders");
-        add(orders);
+        btnOrders = new MenuButton("Orders");
+        btnOrders.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActionPerformed(evt);
+            }
+        });
         
-        reports = new MenuButton("Reports");
-        add(reports);
+        btnReports = new MenuButton("Reports");
+        btnReports.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActionPerformed(evt);
+            }
+        });
         
-        settings = new MenuButton("Settings");
-        add(settings);
+        btnSettings = new MenuButton("Settings");
+        btnSettings.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActionPerformed(evt);
+            }
+        });
+        
+        add(btnNewOrder);
+        add(btnOrders);
+        add(btnReports);
+        add(btnSettings);
     }
 
 

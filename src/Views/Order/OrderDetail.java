@@ -8,6 +8,9 @@ package Views.Order;
 import Controller.OrderDetailController;
 import Models.Food;
 import Models.FoodType;
+import Views.Order.Components.FoodButton;
+import Views.Order.Components.FoodDisplayPanel;
+import Views.Order.Components.FoodTypeButton;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -38,95 +41,125 @@ public class OrderDetail extends javax.swing.JPanel {
     private void initComponents() {
 
         detailPanel = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        orderDetailTable = new javax.swing.JTable();
         foodTypePanel = new javax.swing.JPanel();
         foodPanel = new javax.swing.JPanel();
 
         setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.X_AXIS));
 
-        detailPanel.setPreferredSize(new java.awt.Dimension(250, 300));
+        detailPanel.setPreferredSize(new java.awt.Dimension(500, 0));
+
+        orderDetailTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(orderDetailTable);
 
         javax.swing.GroupLayout detailPanelLayout = new javax.swing.GroupLayout(detailPanel);
         detailPanel.setLayout(detailPanelLayout);
         detailPanelLayout.setHorizontalGroup(
             detailPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 146, Short.MAX_VALUE)
+            .addGroup(detailPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 164, Short.MAX_VALUE)
+                .addContainerGap())
         );
         detailPanelLayout.setVerticalGroup(
             detailPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(detailPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         add(detailPanel);
 
         foodTypePanel.setBackground(new java.awt.Color(204, 255, 255));
-        foodTypePanel.setPreferredSize(new java.awt.Dimension(175, 300));
+        foodTypePanel.setPreferredSize(new java.awt.Dimension(200, 0));
         foodTypePanel.setLayout(new java.awt.GridLayout(0, 1, 5, 10));
         add(foodTypePanel);
 
         foodPanel.setBackground(new java.awt.Color(255, 255, 153));
-        foodPanel.setPreferredSize(new java.awt.Dimension(250, 300));
-        foodPanel.setLayout(new java.awt.GridLayout(0, 3, 5, 5));
+        foodPanel.setPreferredSize(new java.awt.Dimension(500, 0));
+        foodPanel.setLayout(new java.awt.GridLayout(1, 1));
         add(foodPanel);
     }// </editor-fold>//GEN-END:initComponents
 
     private void init() {
         OrderDetailController orderDetailCon = new OrderDetailController();
-        Map<String, ArrayList<Food>> map = orderDetailCon.loadFoods();
-        displayFoods(map);
-    }
-
-    private void displayFoodTypes(ArrayList<FoodType> foodTypes) {
-
-        foodTypesBTNList = new ArrayList<>();
-
-        foodTypes.stream().map((foodType) -> new JButton(foodType.getTypeName())).map((button) -> {
-            foodTypesBTNList.add(button);
-            return button;
-        }).forEachOrdered((button) -> {
-            foodTypePanel.add(button);
-        });
+        displayFoods(orderDetailCon.loadFoods());
     }
 
     private void displayFoods(Map<String, ArrayList<Food>> map) {
-        foodBTNList = new HashMap<>();
+        foodBtnMap = new HashMap<>();
+        foodPanelMap = new HashMap<>();
         foodTypesBTNList = new ArrayList<>();
-        mapFoodPanel = new HashMap<>();
-
+        
+        boolean isExecuted = false;
+        
         for (String key : map.keySet()) {
-            JButton btnFoodType = new JButton(key);
+            JButton btnFoodType = new FoodTypeButton(key);
+
+            btnFoodType.addActionListener((java.awt.event.ActionEvent evt) -> {
+                switchFoodPanel(evt, key);
+            });
+
             foodTypesBTNList.add(btnFoodType);
             foodTypePanel.add(btnFoodType);
 
-            //FOOD Panel
-            JPanel foodPanelLoop = new JPanel();
+            //Food's Panel for each foodType
+            JPanel foodDisplayPanel = new FoodDisplayPanel();
 
             for (Food food : map.get(key)) {
-                
-                System.out.println(key +":"+food.getFoodName());
-                
-                JButton btnFood = new JButton(food.getFoodName());
+
+                //System.out.println(key + ":" + food.getFoodName());
+
+                JButton btnFood = new FoodButton(food.getFoodName());
                 //Use Later
-                foodBTNList.put(food.getId(),btnFood);
-                
-                foodPanelLoop.add(btnFood);//TODO Switch between these panels
-                
-                foodPanel.add(btnFood);//sample
-                
+                foodBtnMap.put(food.getId(), btnFood);
+
+                foodDisplayPanel.add(btnFood);//TODO Switch between these panels
+
             }
+            
             //Food pane for each type of food
-            mapFoodPanel.put(key, foodPanelLoop);//TODO Switch between these panels
-
-
+            foodPanelMap.put(key, foodDisplayPanel);
+            //Initial first food panel with first food type
+            if(!isExecuted){
+                switchFoodPanel(null,key);
+                isExecuted = true;
+            }
+            
         }
 
     }
 
+    public void switchFoodPanel(java.awt.event.ActionEvent evt, String key) {
+        
+        foodPanel.removeAll();
+        
+        foodPanel.add(foodPanelMap.get(key));
+        foodPanel.repaint();
+        foodPanel.revalidate();
+        
+    }
+
     ArrayList<JButton> foodTypesBTNList;
-    Map<Long, JButton> foodBTNList;
-    Map<String, JPanel> mapFoodPanel;
+    Map<Long, JButton> foodBtnMap;
+    Map<String, JPanel> foodPanelMap;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel detailPanel;
     private javax.swing.JPanel foodPanel;
     private javax.swing.JPanel foodTypePanel;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable orderDetailTable;
     // End of variables declaration//GEN-END:variables
 }

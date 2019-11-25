@@ -37,6 +37,7 @@ public class UserDAO {
             PostgreSQLConnection.close(conn, stmt);
         } catch (SQLException e) {
             System.err.println(e.getMessage());
+            e.printStackTrace();
         }
         return users;
     }
@@ -66,6 +67,7 @@ public class UserDAO {
             PostgreSQLConnection.close(conn, stmt);
         } catch (SQLException e) {
             System.err.println(e.getMessage());
+            e.printStackTrace();
         }
         return users;
     }
