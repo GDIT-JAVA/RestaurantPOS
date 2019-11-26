@@ -11,7 +11,7 @@ package Utils;
  * @author PPuarat
  */
 public final class Settings {
-/////prof4
+/////change4
     public static final String PROGRAM_NAME = "Restaurant POS";
     public static final String DB_NAME = "JavaRestaurantPOS";
     public static final String DB_USER = "javaApplication";
