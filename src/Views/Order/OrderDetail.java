@@ -68,7 +68,6 @@ public class OrderDetail extends javax.swing.JPanel {
         orderDetailTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
         orderDetailTable.setAutoscrolls(false);
         orderDetailTable.setMaximumSize(new java.awt.Dimension(0, 2000));
-        orderDetailTable.setPreferredSize(new java.awt.Dimension(0, 736));
         orderDetailTable.setRowHeight(25);
         jScrollPane1.setViewportView(orderDetailTable);
 
