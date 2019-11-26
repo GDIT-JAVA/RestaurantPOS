@@ -19,8 +19,10 @@ public class RestaurantPOS extends javax.swing.JFrame {
      */
     public RestaurantPOS() {
         initComponents();
+        //Create main app and setVisible to false
         Application app = new Application();
         app.setVisible(false);
+        //main app will show after loged in
         Login loginForm = new Login(basePanel, app);
         //basePanel.add(app);
         basePanel.add(loginForm);

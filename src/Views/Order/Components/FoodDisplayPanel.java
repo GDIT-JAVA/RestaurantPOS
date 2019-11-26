@@ -6,7 +6,6 @@
 package Views.Order.Components;
 
 import java.awt.FlowLayout;
-import java.awt.GridLayout;
 import javax.swing.JPanel;
 
 /**
