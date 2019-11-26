@@ -20,7 +20,6 @@ public class Report extends javax.swing.JPanel {
 
     
     //this is a proof
-    //This is another proof
     
     /**
      * This method is called from within the constructor to initialize the form.
