@@ -6,6 +6,10 @@
 package Views;
 
 import Views.Components.MenuButton;
+import Views.Order.OrderDetail;
+import Views.Order.OrderManagement;
+import Views.Report.Report;
+import Views.Setting.Setting;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -42,49 +46,62 @@ public class Menu extends javax.swing.JPanel {
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new java.awt.GridLayout(1, 0));
     }// </editor-fold>//GEN-END:initComponents
-    private void btnActionPerformed(java.awt.event.ActionEvent evt) {
+    private void btnActionPerformed(java.awt.event.ActionEvent evt, JPanel targetPanel) {
         // TODO add your handling code here:
-        JOptionPane.showMessageDialog(null, "Menu bar Clicked!");
-        
+        appPanel.removeAll();
+        appPanel.add(targetPanel);
+        appPanel.repaint();
+        appPanel.revalidate();
+                
+
     }
 
     private void init() {
+        orderDetail = new OrderDetail();
+        orderManagement = new OrderManagement();
+        report = new Report();
+        setting = new Setting();
+        appPanel.add(orderDetail);
+
         btnNewOrder = new MenuButton("New Order");
         btnNewOrder.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnActionPerformed(evt);
+                btnActionPerformed(evt,orderDetail);
             }
         });
-        
+
         btnOrders = new MenuButton("Orders");
         btnOrders.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnActionPerformed(evt);
+                btnActionPerformed(evt,orderManagement);
             }
         });
-        
+
         btnReports = new MenuButton("Reports");
         btnReports.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnActionPerformed(evt);
+                btnActionPerformed(evt, report);
             }
         });
-        
+
         btnSettings = new MenuButton("Settings");
         btnSettings.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnActionPerformed(evt);
+                btnActionPerformed(evt, setting);
             }
         });
-        
+
         add(btnNewOrder);
         add(btnOrders);
         add(btnReports);
         add(btnSettings);
     }
 
+    private javax.swing.JPanel orderDetail;
+    private javax.swing.JPanel orderManagement;
+    private javax.swing.JPanel report;
+    private javax.swing.JPanel setting;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
-
 }

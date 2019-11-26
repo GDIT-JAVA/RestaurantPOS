@@ -44,8 +44,8 @@ public class Application extends javax.swing.JPanel {
         appPanel.setLayout(new java.awt.BorderLayout());
         add(appPanel);
         
-        orderDetail = new OrderDetail();
-        appPanel.add(orderDetail);
+//        orderDetail = new OrderDetail();
+//        appPanel.add(orderDetail);
 
         Menu menu = new Menu(appPanel);
 
@@ -55,6 +55,7 @@ public class Application extends javax.swing.JPanel {
     private javax.swing.JPanel appPanel;
     private javax.swing.JPanel menuPanel;
     private javax.swing.JPanel orderDetail;
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
