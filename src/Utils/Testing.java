@@ -11,6 +11,7 @@ import Models.Food;
 import Models.FoodType;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  *
@@ -24,7 +25,12 @@ public class Testing {
     public static void main(String[] args) throws SQLException {
 
         // TODO code application logic here
-        FoodTypeDAO foodTypeDAO = new FoodTypeDAO();
+       test2();
+
+    }
+    
+    public void test1(){
+         FoodTypeDAO foodTypeDAO = new FoodTypeDAO();
         ArrayList<FoodType> foodTypes = foodTypeDAO.searchAll();
         System.out.println("Utils.Testing.main()");
         FoodDAO foodDAO = new FoodDAO(foodTypes);
@@ -34,7 +40,10 @@ public class Testing {
 
             System.out.println(food.getFoodName() + " " + food.getFoodType().getTypeName());
         }
-
+    }
+    
+    public static void test2(){
+        System.out.println(Utils.getDate());
     }
 
 }

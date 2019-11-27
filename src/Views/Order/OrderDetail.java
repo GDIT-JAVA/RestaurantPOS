@@ -46,6 +46,8 @@ public class OrderDetail extends javax.swing.JPanel {
         orderDetailTable = new javax.swing.JTable();
         paymentBtn = new javax.swing.JButton();
         lblTotal = new javax.swing.JLabel();
+        lblTotalAmount = new javax.swing.JLabel();
+        orderBtn = new javax.swing.JButton();
         foodTypePanel = new javax.swing.JPanel();
         foodPanel = new javax.swing.JPanel();
 
@@ -82,19 +84,35 @@ public class OrderDetail extends javax.swing.JPanel {
         lblTotal.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         lblTotal.setText("Total:");
 
+        lblTotalAmount.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lblTotalAmount.setText("$ 0");
+        lblTotalAmount.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+
+        orderBtn.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        orderBtn.setText("Order");
+        orderBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                orderBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout detailPanelLayout = new javax.swing.GroupLayout(detailPanel);
         detailPanel.setLayout(detailPanelLayout);
         detailPanelLayout.setHorizontalGroup(
             detailPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(detailPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(detailPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(detailPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(detailPanelLayout.createSequentialGroup()
+                        .addComponent(orderBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(paymentBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(lblTotal)
-                        .addGap(124, 124, 124)
-                        .addComponent(paymentBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblTotalAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         detailPanelLayout.setVerticalGroup(
             detailPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -103,9 +121,11 @@ public class OrderDetail extends javax.swing.JPanel {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29)
                 .addGroup(detailPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblTotalAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(paymentBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblTotal))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(orderBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(183, Short.MAX_VALUE))
         );
 
         add(detailPanel);
@@ -126,10 +146,14 @@ public class OrderDetail extends javax.swing.JPanel {
         
     }//GEN-LAST:event_paymentBtnActionPerformed
 
+    private void orderBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_orderBtnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_orderBtnActionPerformed
+
     private void init() {
         OrderDetailController orderDetailCon = new OrderDetailController();
         displayFoods(orderDetailCon.loadFoods());
-        orderdFood = new ArrayList<Food>();
+        orderdFood = new ArrayList<>();
         //init table
         orderDetailTableModel = new javax.swing.table.DefaultTableModel(
                 new Object[][]{},
@@ -216,7 +240,7 @@ public class OrderDetail extends javax.swing.JPanel {
         rowData[0] = food.getFoodName();
         rowData[1] = food.getPrice();
         orderdFood.add(food);
-        lblTotal.setText("Total: " + Utils.calculateTotalPrice(orderdFood));
+        lblTotalAmount.setText("$ " + Utils.calculateTotalPrice(orderdFood));
         orderDetailTableModel.addRow(rowData);
     }
 
@@ -231,6 +255,8 @@ public class OrderDetail extends javax.swing.JPanel {
     private javax.swing.JPanel foodTypePanel;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblTotal;
+    private javax.swing.JLabel lblTotalAmount;
+    private javax.swing.JButton orderBtn;
     private javax.swing.JTable orderDetailTable;
     private javax.swing.JButton paymentBtn;
     // End of variables declaration//GEN-END:variables

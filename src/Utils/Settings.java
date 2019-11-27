@@ -21,5 +21,6 @@ public final class Settings {
     public static final String DB_URL = "jdbc:postgresql://" 
             + DB_ADDRESS + ":" + DB_PORT + "/";
     public static final String FONT = "Tahoma";
+    public static final String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
 
 }

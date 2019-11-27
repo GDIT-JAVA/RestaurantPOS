@@ -52,7 +52,6 @@ public class Menu extends javax.swing.JPanel {
         appPanel.add(targetPanel);
         appPanel.repaint();
         appPanel.revalidate();
-                
 
     }
 
@@ -61,19 +60,20 @@ public class Menu extends javax.swing.JPanel {
         orderManagement = new OrderManagement();
         report = new Report();
         setting = new Setting();
+        //Set default orderDetail
         appPanel.add(orderDetail);
 
         btnNewOrder = new MenuButton("New Order");
         btnNewOrder.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnActionPerformed(evt,orderDetail);
+                btnActionPerformed(evt, orderDetail);
             }
         });
 
         btnOrders = new MenuButton("Orders");
         btnOrders.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnActionPerformed(evt,orderManagement);
+                btnActionPerformed(evt, orderManagement);
             }
         });
 

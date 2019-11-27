@@ -5,8 +5,6 @@
  */
 package Views;
 
-import Views.Order.OrderDetail;
-
 /**
  *
  * @author PPuarat
@@ -14,7 +12,7 @@ import Views.Order.OrderDetail;
 public class Application extends javax.swing.JPanel {
 
     /**
-     * Creates new form applicationPanel
+ * Creates new form applicationPanel
      */
     public Application() {
         initComponents();
@@ -43,10 +41,9 @@ public class Application extends javax.swing.JPanel {
 
         appPanel.setLayout(new java.awt.BorderLayout());
         add(appPanel);
-        
+
 //        orderDetail = new OrderDetail();
 //        appPanel.add(orderDetail);
-
         Menu menu = new Menu(appPanel);
 
         menuPanel.add(menu);
@@ -55,7 +52,7 @@ public class Application extends javax.swing.JPanel {
     private javax.swing.JPanel appPanel;
     private javax.swing.JPanel menuPanel;
     private javax.swing.JPanel orderDetail;
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables

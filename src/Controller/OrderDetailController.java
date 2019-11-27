@@ -7,6 +7,7 @@ package Controller;
 
 import DAOs.FoodDAO;
 import DAOs.FoodTypeDAO;
+import DAOs.OrderDAO;
 import Models.Food;
 import Models.FoodType;
 import java.util.ArrayList;
@@ -25,7 +26,7 @@ public class OrderDetailController {
         ArrayList<FoodType> foodTypes = foodTypeDAO.searchAll();
         FoodDAO foodDAO = new FoodDAO(foodTypes);
 
-        ArrayList<Food> foods = foodDAO.searchAll();
+        //ArrayList<Food> foods = foodDAO.searchAll();
 
         Map<String, ArrayList<Food>> map = new HashMap();
 
@@ -35,5 +36,11 @@ public class OrderDetailController {
 
         }
         return map;
+    }
+    
+    public boolean createOrder(){
+        OrderDAO orderDAO = new OrderDAO();
+        
+        return true;
     }
 }
