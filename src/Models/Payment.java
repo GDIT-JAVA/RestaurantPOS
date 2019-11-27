@@ -10,8 +10,6 @@ package Models;
  * @author Aspire2 Student
  */
 public class Payment extends BaseModel {
-    
-    
     private Order order; 
     private String description;
     private double totalPaid;
