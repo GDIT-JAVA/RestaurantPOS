@@ -19,7 +19,7 @@ import java.util.Map;
  */
 public class ReportController {
     
-    public Map<String, ArrayList<Payment>> loadPayments() {
+    /*public Map<String, ArrayList<Payment>> loadPayments() {
         OrderDAO orderDAO = new OrderDAO();
 
         //ArrayList<Order> orders = orderDAO.searchAll();
