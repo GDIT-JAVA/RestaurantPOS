@@ -19,11 +19,11 @@ import java.util.Map;
  */
 public class ReportController {
     
-    /*public Map<String, ArrayList<Payment>> loadPayments() {
+    public Map<String, ArrayList<Payment>> loadPayments() {
         OrderDAO orderDAO = new OrderDAO();
 
-        //ArrayList<Order> orders = orderDAO.searchAll();
-        //PaymentDAO paymentDAO = new PaymentDAO(orders);
+        ArrayList<Order> orders = orderDAO.searchAll();
+        PaymentDAO paymentDAO = new PaymentDAO(orders);
 
         //ArrayList<Food> foods = foodDAO.searchAll();
 
@@ -33,8 +33,8 @@ public class ReportController {
             map.put(orders.get(i).getId(),
                     paymentDAO.searchAll(orders.get(i).getCustomer()));
 
-        }
+        }*/
         return map;
-    }*/
+    }
     
 }
