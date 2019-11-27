@@ -26,3 +26,5 @@ nbproject/private/private.xml
 nbproject/project.properties
 src/Utils/Settings.java
 *.properties
+*.properties
+src/Views/Order/.LCKPayment.java~

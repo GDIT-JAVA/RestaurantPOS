@@ -13,13 +13,14 @@ public class Payment extends BaseModel {
     
     
     private Order order; 
+    private String description;
     private double totalPaid;
     
-     public long getId() {
+     public long getID() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setID(long id) {
         this.id = id;
     }
     
@@ -45,6 +46,14 @@ public class Payment extends BaseModel {
     
     public void setTotalPaid(double totalPaid){
         this.totalPaid = totalPaid;
+    }
+    
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
     
     public boolean getIsActive(){
