@@ -6,7 +6,6 @@
 package DAOs;
 
 import Models.Order;
-import Utils.Settings;
 import Utils.Utils;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -22,9 +21,9 @@ public class OrderDAO {
 
     private final static String TABLE = "orders";
 
-    public boolean create() {
-        boolean isCreated = false;
-
+    public long create() {
+        long latestId = 0;
+        int index = 1;
         Connection conn = null;
         PreparedStatement stmt = null;
         try {
@@ -35,33 +34,36 @@ public class OrderDAO {
                     + "created_at, is_active)"
                     + "VALUES(?, ?, ?, ?, ?);";
 
-            stmt = conn.prepareStatement(SQL);
-            
+            stmt = conn.prepareStatement(SQL, PreparedStatement.RETURN_GENERATED_KEYS);
+
             //set customer. 6 means INTEGER
-            stmt.setNull(1, 6);
+            stmt.setNull(index++, 6);
             //set user
-            stmt.setLong(2, 1);
+            stmt.setLong(index++, 1);
             //set is_takeAway
-            stmt.setBoolean(2, false);
+            stmt.setBoolean(index++, false);
             //set date
-            stmt.setString(4, Utils.getDate());
+            stmt.setTimestamp(index++, Utils.getSqlTimestamp());
             //set is_active
-            stmt.setBoolean(5, true);
-            
-            //Check query
+            stmt.setBoolean(index++, true);
+
+            //Check query   
             //System.out.println(stmt);
-            //ResultSet rs = stmt.executeQuery();
-            if (stmt.executeUpdate() > 0) {
-                isCreated = true;
+            stmt.execute();
+            ResultSet rs = stmt.getGeneratedKeys();
+            if (rs.next()) {
+
+                latestId = rs.getLong(1);
             }
+
         } catch (SQLException e) {
             System.err.println(e.toString());
         } finally {
             PostgreSQLConnection.close(conn, stmt);
         }
-        return isCreated;
+        return latestId;
     }
-    
+
     public ArrayList<Order> searchAll() {
         ArrayList<Order> orders = new ArrayList<>();
         Connection conn = null;
@@ -71,20 +73,19 @@ public class OrderDAO {
             conn = PostgreSQLConnection.connect();
 
             String SQL = "SELECT id, customer_id, user_id, is_takeaway, created_at, is_active "
-                    + "FROM "+ TABLE +" "
+                    + "FROM " + TABLE + " "
                     + "WHERE is_active=?;";
 
             stmt = conn.prepareStatement(SQL);
-            
+
             //set is_active
             stmt.setBoolean(1, true);
-            
+
             //Check query
             //System.out.println(stmt);
-            
             ResultSet rs = stmt.executeQuery();
             orders = map(rs);
-           
+
         } catch (SQLException e) {
             System.err.println(e.toString());
         } finally {
@@ -92,9 +93,9 @@ public class OrderDAO {
         }
         return orders;
     }
-    
-    public ArrayList<Order> searchById(Long id) {
-        ArrayList<Order> orders = new ArrayList<>();
+
+    public Order searchById(Long id) {
+        Order order = new Order();
         Connection conn = null;
         PreparedStatement stmt = null;
         try {
@@ -102,48 +103,54 @@ public class OrderDAO {
             conn = PostgreSQLConnection.connect();
 
             String SQL = "SELECT id, customer_id, user_id, is_takeaway, created_at, is_active "
-                    + "FROM "+ TABLE +" "
+                    + "FROM " + TABLE + " "
                     + "WHERE is_active=? and id = ?;";
 
             stmt = conn.prepareStatement(SQL);
-            
+
             //set is_active
             stmt.setBoolean(1, true);
-            
+
             stmt.setLong(2, id);
-            
+
             //Check query
             //System.out.println(stmt);
-            
             ResultSet rs = stmt.executeQuery();
-            orders = map(rs);
-           
+            order = mapSingle(rs);
+
         } catch (SQLException e) {
             System.err.println(e.toString());
         } finally {
             PostgreSQLConnection.close(conn, stmt);
         }
-        return orders;
+        return order;
     }
-    
-     private ArrayList<Order> map(ResultSet rs) throws SQLException {
+
+    private ArrayList<Order> map(ResultSet rs) throws SQLException {
 
         ArrayList<Order> orders = new ArrayList<>();
-
         while (rs.next()) {
 
-            Order order = new Order();
+            orders.add(mapSingle(rs));
+        }
+
+        return orders;
+    }
+
+    private Order mapSingle(ResultSet rs) throws SQLException {
+        Order order = new Order();
+        UserDAO userDAO = new UserDAO();
+        if (rs.next()) {
 
             order.setId(rs.getLong("id"));
             order.setCreatedAt(rs.getString("created_at"));
             order.setIsTakeAway(rs.getBoolean("is_takeaway"));
             order.setIsActive(rs.getBoolean("is_active"));
             order.setCustomer(null);
-            order.setUser(null);
-            
-            orders.add(order);
+            order.setUser(userDAO.searchById(rs.getLong("user_id")).get(0));
+
         }
 
-        return orders;
+        return order;
     }
 }
