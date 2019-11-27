@@ -119,7 +119,7 @@ public class OrderDetail extends javax.swing.JPanel {
             .addGroup(detailPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
+                .addGap(43, 43, 43)
                 .addGroup(detailPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblTotalAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -228,7 +228,6 @@ public class OrderDetail extends javax.swing.JPanel {
     public void switchFoodPanel(java.awt.event.ActionEvent evt, String key) {
 
         foodPanel.removeAll();
-
         foodPanel.add(foodPanelMap.get(key));
         foodPanel.repaint();
         foodPanel.revalidate();

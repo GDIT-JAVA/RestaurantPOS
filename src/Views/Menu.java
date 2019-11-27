@@ -60,7 +60,7 @@ public class Menu extends javax.swing.JPanel {
         orderManagement = new OrderManagement();
         report = new Report();
         setting = new Setting();
-        //Set default orderDetail
+        //Set default page orderDetail
         appPanel.add(orderDetail);
 
         btnNewOrder = new MenuButton("New Order");

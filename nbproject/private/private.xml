@@ -3,11 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/Users/PPuarat/Documents/NetBeansProjects/RestaurantPOS/src/Utils/Testing.java</file>
             <file>file:/C:/Users/PPuarat/Documents/NetBeansProjects/RestaurantPOS/src/Utils/Utils.java</file>
             <file>file:/C:/Users/PPuarat/Documents/NetBeansProjects/RestaurantPOS/src/Utils/Settings.java</file>
             <file>file:/C:/Users/PPuarat/Documents/NetBeansProjects/RestaurantPOS/src/Controller/OrderDetailController.java</file>
             <file>file:/C:/Users/PPuarat/Documents/NetBeansProjects/RestaurantPOS/src/DAOs/OrderDAO.java</file>
+=======
+            <file>file:/C:/Users/Aspire2%20Student/Desktop/Graduated%20Diploma%20in%20IT/Java%20Programming/Junior/Assesments/Assesment%202/Project/RestaurantPOS/src/Views/RestaurantPOS.java</file>
+>>>>>>> 9eb92449314e7c3a84690d89199377db182e4ced
         </group>
     </open-files>
 </project-private>
