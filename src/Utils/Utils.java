@@ -1,12 +1,8 @@
 package Utils;
 
 import Models.Food;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-
+import java.sql.Timestamp;
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -28,11 +24,8 @@ public final class Utils {
         return total;
     }
 
-    public static String getDate() {
+    public static Timestamp getSqlTimestamp() {
         
-        Date date = Calendar.getInstance().getTime();
-        DateFormat dateFormat = new SimpleDateFormat(Settings.DATE_FORMAT);
-        
-        return dateFormat.format(date);
+        return new Timestamp(System.currentTimeMillis());
     }
 }
