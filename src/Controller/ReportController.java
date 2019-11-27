@@ -5,8 +5,12 @@
  */
 package Controller;
 
+import DAOs.OrderDAO;
+import DAOs.PaymentDAO;
+import Models.Order;
 import Views.Order.Payment;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -15,9 +19,22 @@ import java.util.Map;
  */
 public class ReportController {
     
-    /*public Map<String, ArrayList<Payment>> loadReport(){
-        
-    
+    public Map<String, ArrayList<Payment>> loadPayments() {
+        OrderDAO orderDAO = new OrderDAO();
+
+        //ArrayList<Order> orders = orderDAO.searchAll();
+        //PaymentDAO paymentDAO = new PaymentDAO(orders);
+
+        //ArrayList<Food> foods = foodDAO.searchAll();
+
+        Map<String, ArrayList<Payment>> map = new HashMap();
+
+        /*for (int i = 0; i < orders.size(); i++) {
+            map.put(orders.get(i).getId(),
+                    paymentDAO.searchAll(orders.get(i).getCustomer()));
+
+        }
+        return map;
     }*/
     
 }
