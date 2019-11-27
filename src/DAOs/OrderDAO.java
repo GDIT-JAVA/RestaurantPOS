@@ -93,6 +93,39 @@ public class OrderDAO {
         return orders;
     }
     
+    public ArrayList<Order> searchById(Long id) {
+        ArrayList<Order> orders = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        try {
+
+            conn = PostgreSQLConnection.connect();
+
+            String SQL = "SELECT id, customer_id, user_id, is_takeaway, created_at, is_active "
+                    + "FROM "+ TABLE +" "
+                    + "WHERE is_active=? and id = ?;";
+
+            stmt = conn.prepareStatement(SQL);
+            
+            //set is_active
+            stmt.setBoolean(1, true);
+            
+            stmt.setLong(2, id);
+            
+            //Check query
+            //System.out.println(stmt);
+            
+            ResultSet rs = stmt.executeQuery();
+            orders = map(rs);
+           
+        } catch (SQLException e) {
+            System.err.println(e.toString());
+        } finally {
+            PostgreSQLConnection.close(conn, stmt);
+        }
+        return orders;
+    }
+    
      private ArrayList<Order> map(ResultSet rs) throws SQLException {
 
         ArrayList<Order> orders = new ArrayList<>();
