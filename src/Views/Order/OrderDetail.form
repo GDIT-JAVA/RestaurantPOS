@@ -55,11 +55,13 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jScrollPane1" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="43" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="lblTotalAmount" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="lblTotal" alignment="0" min="-2" pref="35" max="-2" attributes="0"/>
-                      <Component id="paymentBtn" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
-                      <Component id="orderBtn" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="lblTotalAmount" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                          <Component id="paymentBtn" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
+                          <Component id="orderBtn" alignment="3" min="-2" pref="50" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
                   <EmptySpace pref="183" max="32767" attributes="0"/>
               </Group>
