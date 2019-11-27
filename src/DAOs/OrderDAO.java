@@ -5,12 +5,14 @@
  */
 package DAOs;
 
+import Models.Order;
 import Utils.Settings;
 import Utils.Utils;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
+import java.util.ArrayList;
 
 /**
  *
@@ -58,5 +60,57 @@ public class OrderDAO {
             PostgreSQLConnection.close(conn, stmt);
         }
         return isCreated;
+    }
+    
+    public ArrayList<Order> searchAll() {
+        ArrayList<Order> orders = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        try {
+
+            conn = PostgreSQLConnection.connect();
+
+            String SQL = "SELECT id, customer_id, user_id, is_takeaway, created_at, is_active "
+                    + "FROM "+ TABLE +" "
+                    + "WHERE is_active=?;";
+
+            stmt = conn.prepareStatement(SQL);
+            
+            //set is_active
+            stmt.setBoolean(1, true);
+            
+            //Check query
+            //System.out.println(stmt);
+            
+            ResultSet rs = stmt.executeQuery();
+            orders = map(rs);
+           
+        } catch (SQLException e) {
+            System.err.println(e.toString());
+        } finally {
+            PostgreSQLConnection.close(conn, stmt);
+        }
+        return orders;
+    }
+    
+     private ArrayList<Order> map(ResultSet rs) throws SQLException {
+
+        ArrayList<Order> orders = new ArrayList<>();
+
+        while (rs.next()) {
+
+            Order order = new Order();
+
+            order.setId(rs.getLong("id"));
+            order.setCreatedAt(rs.getString("created_at"));
+            order.setIsTakeAway(rs.getBoolean("is_takeaway"));
+            order.setIsActive(rs.getBoolean("is_active"));
+            order.setCustomer(null);
+            order.setUser(null);
+            
+            orders.add(order);
+        }
+
+        return orders;
     }
 }
