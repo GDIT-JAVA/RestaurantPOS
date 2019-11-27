@@ -140,14 +140,15 @@ public class OrderDAO {
     private Order mapSingle(ResultSet rs) throws SQLException {
         Order order = new Order();
         UserDAO userDAO = new UserDAO();
+        CustomerDAO customerDAO = new CustomerDAO();
         if (rs.next()) {
 
             order.setId(rs.getLong("id"));
             order.setCreatedAt(rs.getString("created_at"));
             order.setIsTakeAway(rs.getBoolean("is_takeaway"));
             order.setIsActive(rs.getBoolean("is_active"));
-            order.setCustomer(null);
-            order.setUser(userDAO.searchById(rs.getLong("user_id")).get(0));
+            order.setCustomer(customerDAO.searchById(rs.getLong("customer_id")));
+            order.setUser(userDAO.searchById(rs.getLong("user_id")));
 
         }
 

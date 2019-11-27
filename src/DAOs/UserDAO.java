@@ -41,7 +41,7 @@ public class UserDAO {
             System.err.println(e.getMessage());
             e.printStackTrace();
         } finally {
-            
+
             PostgreSQLConnection.close(conn, stmt);
 
         }
@@ -82,10 +82,11 @@ public class UserDAO {
         return users;
     }
 
-    public ArrayList<User> searchById(long id) {
-        ArrayList<User> users = new ArrayList<>();
+    public User searchById(long id) {
+        User user = new User();
         Connection conn = null;
         PreparedStatement stmt = null;
+        int index = 1;
         try {
 
             conn = PostgreSQLConnection.connect();
@@ -98,20 +99,20 @@ public class UserDAO {
             stmt = conn.prepareStatement(SQL);
 
             //set is_active
-            stmt.setBoolean(1, true);
-            stmt.setLong(2, id);
+            stmt.setBoolean(index++, true);
+            stmt.setLong(index++, id);
 
             //Check query
             //System.out.println(stmt);
             ResultSet rs = stmt.executeQuery();
-            users = map(rs);
+            user = mapSingle(rs);
 
         } catch (SQLException e) {
             System.err.println(e.toString());
         } finally {
             PostgreSQLConnection.close(conn, stmt);
         }
-        return users;
+        return user;
     }
 
     private ArrayList<User> map(ResultSet rs) throws SQLException {
@@ -119,8 +120,17 @@ public class UserDAO {
         ArrayList<User> users = new ArrayList<>();
 
         while (rs.next()) {
+            users.add(mapSingle(rs));
+        }
 
-            User user = new User();
+        return users;
+    }
+
+    private User mapSingle(ResultSet rs) throws SQLException {
+        
+        User user = new User();
+
+        if (rs.next()) {
 
             user.setId(rs.getLong("id"));
             user.setUserName(rs.getString("user_name"));
@@ -132,9 +142,8 @@ public class UserDAO {
             user.setCreatedAt(rs.getString("created_at"));
             user.setIsActive(rs.getBoolean("is_active"));
 
-            users.add(user);
         }
 
-        return users;
+        return user;
     }
 }

@@ -50,11 +50,12 @@ public class CustomerDAO {
         }
         return customers;
     }
-    
-        public ArrayList<Customer> searchById(long id) {
-        ArrayList<Customer> customers = new ArrayList<>();
+
+    public Customer searchById(long id) {
+        Customer customer = new Customer();
         Connection conn = null;
         PreparedStatement stmt = null;
+        int index = 1;
         try {
 
             conn = PostgreSQLConnection.connect();
@@ -67,22 +68,21 @@ public class CustomerDAO {
             stmt = conn.prepareStatement(SQL);
 
             //set is_active
-            stmt.setBoolean(1, true);
-            stmt.setLong(2, id);
+            stmt.setBoolean(index++, true);
+            stmt.setLong(index++, id);
 
             //Check query
             //System.out.println(stmt);
             ResultSet rs = stmt.executeQuery();
-            customers = map(rs);
+            customer = mapSingle(rs);
 
         } catch (SQLException e) {
             System.err.println(e.toString());
         } finally {
             PostgreSQLConnection.close(conn, stmt);
         }
-        return customers;
+        return customer;
     }
-
 
     private ArrayList<Customer> map(ResultSet rs) throws SQLException {
 
@@ -90,21 +90,30 @@ public class CustomerDAO {
 
         while (rs.next()) {
 
-            Customer customer = new Customer();
+            customers.add(mapSingle(rs));
+        }
+
+        return customers;
+    }
+
+    private Customer mapSingle(ResultSet rs) throws SQLException {
+
+        Customer customer = new Customer();
+
+        if (rs.next()) {
 
             customer.setId(rs.getLong("id"));
             customer.setCreatedAt(rs.getString("created_at"));
             customer.setIsActive(rs.getBoolean("is_active"));
-            
+
             customer.setFirstName(rs.getString("first_name"));
             customer.setLastName(rs.getString("last_name"));
             customer.setPhone(rs.getString("phone"));
             customer.setEmail(rs.getString("email"));
             customer.setDescription(rs.getString("description"));
 
-            customers.add(customer);
         }
 
-        return customers;
+        return customer;
     }
 }
