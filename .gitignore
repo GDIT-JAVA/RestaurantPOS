@@ -28,3 +28,5 @@ src/Utils/Settings.java
 *.properties
 *.properties
 src/Views/Order/.LCKPayment.java~
+*.properties
+*.properties
