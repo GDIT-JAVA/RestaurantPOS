@@ -21,6 +21,7 @@ public class PaymentDAO {
     
     private final static String TABLE = "payments";
     private ArrayList<Order> orders;
+    private OrderDAO orderDAO = new OrderDAO();
     
     public PaymentDAO(ArrayList<Order> orders){
         this.orders = orders;
@@ -37,15 +38,18 @@ public class PaymentDAO {
 
             PreparedStatement stmt = conn.prepareStatement(SQL);
             ResultSet rs = stmt.executeQuery();
-
+            
+            
             payments = this.map(rs);
-
+            
+            
             PostgreSQLConnection.close(conn, stmt);
         }
         catch(SQLException e){
             System.err.println(e.getMessage());
             e.printStackTrace();
         }
+        
         return payments;
         
     }
@@ -59,27 +63,16 @@ public class PaymentDAO {
             Payment payment = new Payment();
 
             payment.setID(rs.getLong("id"));
+            //payment.setOrder(orderDAO.searchById(rs.getLong("order_id")));
             payment.setCreatedAt(rs.getString("created_at"));
+            payment.setTotalPaid(rs.getDouble("total"));
             payment.setDescription(rs.getString("description"));
-            payment.setTotalPaid(rs.getDouble("price"));
             payment.setIsActive(rs.getBoolean("is_active"));
-            //TODO SET ORDER HERE
-            payment.setOrder(mapOrder(rs.getLong("order_id")));
+            
             payments.add(payment);
         }
 
         return payments;
     }
     
-     private Order mapOrder(long OrderID) {
-
-        for (Order order : this.orders) {
-            if (order.getId() == OrderID) {
-                return order;
-            }
-        }
-
-        return null;
-    }
-     
 }
