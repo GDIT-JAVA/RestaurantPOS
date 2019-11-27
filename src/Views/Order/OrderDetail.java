@@ -204,7 +204,6 @@ public class OrderDetail extends javax.swing.JPanel {
     public void switchFoodPanel(java.awt.event.ActionEvent evt, String key) {
 
         foodPanel.removeAll();
-
         foodPanel.add(foodPanelMap.get(key));
         foodPanel.repaint();
         foodPanel.revalidate();
