@@ -18,6 +18,7 @@ public class LoginController {
     public boolean login(String username, char[] password) {
 
         //System.out.println(username +" "+ password);
+
         UserDAO userDAO = new UserDAO();
 
         ArrayList<User> users;
@@ -27,5 +28,7 @@ public class LoginController {
 //            return true;
 //        }
 //        return false;
+
+
     }
 }
