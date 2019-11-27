@@ -12,8 +12,8 @@ package Utils;
  */
 public final class Settings {
 /////change4
-    public static final String PROGRAM_NAME = "Restaurant POS";
-    public static final String DB_NAME = "JavaRestaurantPOS";
+    public static final String PROGRAM_NAME = "postgres";
+    public static final String DB_NAME = "postgres";
     public static final String DB_USER = "javaApplication";
     public static final String DB_PASSWORD = "javajava";
     public static final String DB_ADDRESS = "localhost";
