@@ -20,11 +20,9 @@ import java.sql.SQLException;
 public class PaymentDAO {
     
     private final static String TABLE = "payments";
-    private ArrayList<Order> orders;
     private OrderDAO orderDAO = new OrderDAO();
     
-    public PaymentDAO(ArrayList<Order> orders){
-        this.orders = orders;
+    public PaymentDAO(){
         System.out.println("DAOs.PaymentDAO.<init>()");
     }
     
@@ -54,6 +52,31 @@ public class PaymentDAO {
         
     }
     
+    private ArrayList<Payment> searchByTimeInterval(String timeInterval){
+    
+    ArrayList<Payment> payments = new ArrayList<>();
+        try{
+            Connection conn = PostgreSQLConnection.connect();
+            String SQL = "SELECT count(1) "
+                    + "FROM " + TABLE + " WHERE is_active = true "
+                    + " and created_at > now() - interval ?;";
+            
+            PreparedStatement stmt = conn.prepareStatement(SQL);
+            stmt.setString(1, timeInterval);
+            ResultSet rs = stmt.executeQuery();
+            
+            payments = this.map(rs);
+            
+            PostgreSQLConnection.close(conn, stmt);
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+            e.printStackTrace();
+        }
+        
+        return payments;
+    
+    }
+    
     private ArrayList<Payment> map(ResultSet rs) throws SQLException {
 
         ArrayList<Payment> payments = new ArrayList<>();
@@ -63,7 +86,7 @@ public class PaymentDAO {
             Payment payment = new Payment();
 
             payment.setID(rs.getLong("id"));
-            //payment.setOrder(orderDAO.searchById(rs.getLong("order_id")));
+            payment.setOrder(orderDAO.searchById(rs.getLong("order_id")));
             payment.setCreatedAt(rs.getString("created_at"));
             payment.setTotalPaid(rs.getDouble("total"));
             payment.setDescription(rs.getString("description"));
