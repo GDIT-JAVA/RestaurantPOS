@@ -1,6 +1,7 @@
 package Utils;
 
 import Models.Food;
+import Models.Payment;
 import java.util.ArrayList;
 import java.sql.Timestamp;
 /*
@@ -22,6 +23,16 @@ public final class Utils {
         }
 
         return total;
+    }
+    
+    public static double caculateTotalPaid(ArrayList<Payment> payments){
+        
+        double total = 0; 
+        for(int i = 0; i<payments.size();i++){
+            total += payments.get(i).getTotalPaid();
+        }
+        return total; 
+        
     }
 
     public static Timestamp getSqlTimestamp() {
