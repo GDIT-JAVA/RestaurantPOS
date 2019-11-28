@@ -92,7 +92,7 @@ public class UserDAO {
             conn = PostgreSQLConnection.connect();
 
             String SQL = "SELECT id, first_name, last_name, phone, email, "
-                    + "description, created_at, is_active "
+                    + " created_at, is_active "
                     + "FROM " + TABLE + " "
                     + "WHERE is_active=? and id=?;";
 
