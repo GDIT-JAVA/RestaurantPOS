@@ -77,26 +77,62 @@ public class FoodDAO {
         return foods;
     }
 
+    public Food searchById(Long foodId) {
+
+        Food food = new Food();
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        try {
+            conn = PostgreSQLConnection.connect();
+
+            String SQL = "SELECT * FROM " + TABLE + " WHERE is_active = true "
+                    + " and id = ?;";
+
+            stmt = conn.prepareStatement(SQL);
+            stmt.setLong(1, foodId);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                food = mapSingle(rs);
+
+            }
+
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+            e.printStackTrace();
+        } finally {
+            PostgreSQLConnection.close(conn, stmt);
+
+        }
+        return food;
+    }
+
     private ArrayList<Food> map(ResultSet rs) throws SQLException {
 
         ArrayList<Food> foods = new ArrayList<>();
 
         while (rs.next()) {
 
-            Food food = new Food();
-
-            food.setId(rs.getLong("id"));
-            food.setFoodName(rs.getString("food_name"));
-            food.setDescription(rs.getString("description"));
-            food.setPrice(rs.getDouble("price"));
-            food.setCreatedAt(rs.getString("created_at"));
-            food.setIsActive(rs.getBoolean("is_active"));
-            //TODO SET FOODTYPE
-            food.setFoodType(mapFoodType(rs.getLong("type_id")));
-            foods.add(food);
+            foods.add(mapSingle(rs));
         }
 
         return foods;
+    }
+
+    private Food mapSingle(ResultSet rs) throws SQLException {
+
+        Food food = new Food();
+
+        food.setId(rs.getLong("id"));
+        food.setFoodName(rs.getString("food_name"));
+        food.setDescription(rs.getString("description"));
+        food.setPrice(rs.getDouble("price"));
+        food.setCreatedAt(rs.getString("created_at"));
+        food.setIsActive(rs.getBoolean("is_active"));
+        //TODO SET FOODTYPE
+        food.setFoodType(mapFoodType(rs.getLong("type_id")));
+
+        return food;
     }
 
     private FoodType mapFoodType(long foodTypeId) {

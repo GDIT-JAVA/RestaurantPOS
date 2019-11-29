@@ -74,7 +74,10 @@ public class CustomerDAO {
             //Check query
             //System.out.println(stmt);
             ResultSet rs = stmt.executeQuery();
-            customer = mapSingle(rs);
+            if (rs.next()) {
+                customer = mapSingle(rs);
+
+            }
 
         } catch (SQLException e) {
             System.err.println(e.toString());
@@ -100,19 +103,15 @@ public class CustomerDAO {
 
         Customer customer = new Customer();
 
-        if (rs.next()) {
+        customer.setId(rs.getLong("id"));
+        customer.setCreatedAt(rs.getString("created_at"));
+        customer.setIsActive(rs.getBoolean("is_active"));
 
-            customer.setId(rs.getLong("id"));
-            customer.setCreatedAt(rs.getString("created_at"));
-            customer.setIsActive(rs.getBoolean("is_active"));
-
-            customer.setFirstName(rs.getString("first_name"));
-            customer.setLastName(rs.getString("last_name"));
-            customer.setPhone(rs.getString("phone"));
-            customer.setEmail(rs.getString("email"));
-            customer.setDescription(rs.getString("description"));
-
-        }
+        customer.setFirstName(rs.getString("first_name"));
+        customer.setLastName(rs.getString("last_name"));
+        customer.setPhone(rs.getString("phone"));
+        customer.setEmail(rs.getString("email"));
+        customer.setDescription(rs.getString("description"));
 
         return customer;
     }

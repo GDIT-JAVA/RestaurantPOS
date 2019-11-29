@@ -91,7 +91,7 @@ public class UserDAO {
 
             conn = PostgreSQLConnection.connect();
 
-            String SQL = "SELECT id, first_name, last_name, phone, email, "
+            String SQL = "SELECT id, user_name, password, first_name, last_name, phone, email, "
                     + " created_at, is_active "
                     + "FROM " + TABLE + " "
                     + "WHERE is_active=? and id=?;";
@@ -105,7 +105,10 @@ public class UserDAO {
             //Check query
             //System.out.println(stmt);
             ResultSet rs = stmt.executeQuery();
-            user = mapSingle(rs);
+            if (rs.next()) {
+                user = mapSingle(rs);
+
+            }
 
         } catch (SQLException e) {
             System.err.println(e.toString());
@@ -127,22 +130,18 @@ public class UserDAO {
     }
 
     private User mapSingle(ResultSet rs) throws SQLException {
-        
+
         User user = new User();
 
-        if (rs.next()) {
-
-            user.setId(rs.getLong("id"));
-            user.setUserName(rs.getString("user_name"));
-            user.setPassword(rs.getString("password"));
-            user.setFirstName(rs.getString("first_name"));
-            user.setLastName(rs.getString("last_name"));
-            user.setPhone(rs.getString("phone"));
-            user.setEmail(rs.getString("email"));
-            user.setCreatedAt(rs.getString("created_at"));
-            user.setIsActive(rs.getBoolean("is_active"));
-
-        }
+        user.setId(rs.getLong("id"));
+        user.setUserName(rs.getString("user_name"));
+        user.setPassword(rs.getString("password"));
+        user.setFirstName(rs.getString("first_name"));
+        user.setLastName(rs.getString("last_name"));
+        user.setPhone(rs.getString("phone"));
+        user.setEmail(rs.getString("email"));
+        user.setCreatedAt(rs.getString("created_at"));
+        user.setIsActive(rs.getBoolean("is_active"));
 
         return user;
     }

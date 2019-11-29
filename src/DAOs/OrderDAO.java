@@ -94,6 +94,37 @@ public class OrderDAO {
         return orders;
     }
 
+    public ArrayList<Order> searchUnpaid() {
+        ArrayList<Order> orders = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        try {
+
+            conn = PostgreSQLConnection.connect();
+            //TODO Find unpaid orders
+            String SQL = "SELECT id, customer_id, user_id, is_takeaway, created_at, is_active "
+                    + "FROM " + TABLE + " "
+                    + "WHERE is_active=?;";
+
+            stmt = conn.prepareStatement(SQL);
+
+            //set is_active
+            stmt.setBoolean(1, true);
+
+            //Check query
+            System.out.println(stmt);
+            ResultSet rs = stmt.executeQuery();
+            orders = map(rs);
+            System.out.println("Size of orders: " + orders.size());
+        } catch (SQLException e) {
+            System.err.println(e.toString());
+            e.printStackTrace();
+        } finally {
+            PostgreSQLConnection.close(conn, stmt);
+        }
+        return orders;
+    }
+
     public Order searchById(Long id) {
         Order order = new Order();
         Connection conn = null;
@@ -116,7 +147,10 @@ public class OrderDAO {
             //Check query
             //System.out.println(stmt);
             ResultSet rs = stmt.executeQuery();
-            order = mapSingle(rs);
+            if (rs.next()) {
+
+                order = mapSingle(rs);
+            }
 
         } catch (SQLException e) {
             System.err.println(e.toString());
@@ -126,22 +160,28 @@ public class OrderDAO {
         return order;
     }
 
-    private ArrayList<Order> map(ResultSet rs) throws SQLException {
+    private ArrayList<Order> map(ResultSet rs) {
 
         ArrayList<Order> orders = new ArrayList<>();
-        while (rs.next()) {
+        try {
+            while (rs.next()) {
 
-            orders.add(mapSingle(rs));
+                orders.add(mapSingle(rs));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
 
         return orders;
     }
 
-    private Order mapSingle(ResultSet rs) throws SQLException {
+    private Order mapSingle(ResultSet rs) {
         Order order = new Order();
         UserDAO userDAO = new UserDAO();
         CustomerDAO customerDAO = new CustomerDAO();
-        if (rs.next()) {
+
+        try {
 
             order.setId(rs.getLong("id"));
             order.setCreatedAt(rs.getString("created_at"));
@@ -150,6 +190,8 @@ public class OrderDAO {
             order.setCustomer(customerDAO.searchById(rs.getLong("customer_id")));
             order.setUser(userDAO.searchById(rs.getLong("user_id")));
 
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
 
         return order;
