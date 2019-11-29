@@ -7,6 +7,7 @@ package Views.Order;
 
 import Controller.OrderDetailController;
 import Models.Food;
+import Models.Order;
 import Utils.Utils;
 import Views.Order.Components.FoodButton;
 import Views.Order.Components.FoodDisplayPanel;
@@ -15,6 +16,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
@@ -119,13 +121,13 @@ public class OrderDetail extends javax.swing.JPanel {
             .addGroup(detailPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(43, 43, 43)
+                .addGap(37, 37, 37)
                 .addGroup(detailPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblTotalAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(paymentBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(orderBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(169, Short.MAX_VALUE))
+                .addContainerGap(175, Short.MAX_VALUE))
         );
 
         add(detailPanel);
@@ -143,17 +145,50 @@ public class OrderDetail extends javax.swing.JPanel {
 
     private void paymentBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_paymentBtnActionPerformed
         // TODO add your handling code here:
-        
+        if (showPaymentPanel) {
+            this.remove(paymentPanel);
+            this.add(foodTypePanel);
+            this.add(foodPanel);
+            this.repaint();
+            this.revalidate();
+        } else {
+            this.remove(foodTypePanel);
+            this.remove(foodPanel);
+            this.add(paymentPanel);
+            this.repaint();
+            this.revalidate();
+
+        }
+
+        showPaymentPanel = !showPaymentPanel;
     }//GEN-LAST:event_paymentBtnActionPerformed
 
     private void orderBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_orderBtnActionPerformed
         // TODO add your handling code here:
+        currentOrder = orderDetailCon.createOrder(orderdFoods);
+        
+        if (currentOrder.getId() > 0) {
+
+            JOptionPane.showMessageDialog(null, "Order created");
+            orderBtn.setVisible(false);
+            this.detailPanel.remove(orderBtn);
+            this.detailPanel.repaint();
+            this.detailPanel.revalidate();
+        }
     }//GEN-LAST:event_orderBtnActionPerformed
 
     private void init() {
-        OrderDetailController orderDetailCon = new OrderDetailController();
+        //Payment Pane
+        paymentPanel = new Payment();
+        //If true = show Payment
+        showPaymentPanel = false;
+
+        orderDetailCon = new OrderDetailController();
+        //Init foods
         displayFoods(orderDetailCon.loadFoods());
-        orderdFood = new ArrayList<>();
+
+        orderdFoods = new ArrayList<>();
+
         //init table
         orderDetailTableModel = new javax.swing.table.DefaultTableModel(
                 new Object[][]{},
@@ -233,21 +268,31 @@ public class OrderDetail extends javax.swing.JPanel {
         foodPanel.revalidate();
 
     }
+
     //This method will triggered after you clicked on food button
     public void orderFood(java.awt.event.ActionEvent evt, Food food) {
+        //Show newly added food in table
         Object[] rowData = new Object[2];
         rowData[0] = food.getFoodName();
         rowData[1] = food.getPrice();
-        orderdFood.add(food);
-        lblTotalAmount.setText("$ " + Utils.calculateTotalPrice(orderdFood));
         orderDetailTableModel.addRow(rowData);
+
+        //Total Amount
+        lblTotalAmount.setText("$ " + Utils.calculateTotalPrice(orderdFoods));
+        //Add foods in arrayList
+        orderdFoods.add(food);
+
     }
 
+    Order currentOrder;
+    Boolean showPaymentPanel;
     ArrayList<JButton> foodTypesBTNList;
     Map<Long, JButton> foodBtnMap;
     Map<String, JPanel> foodPanelMap;
     DefaultTableModel orderDetailTableModel;
-    ArrayList<Food> orderdFood;
+    ArrayList<Food> orderdFoods;
+    OrderDetailController orderDetailCon;
+    private javax.swing.JPanel paymentPanel;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel detailPanel;
     private javax.swing.JPanel foodPanel;

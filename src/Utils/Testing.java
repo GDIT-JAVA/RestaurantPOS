@@ -7,11 +7,11 @@ package Utils;
 
 import DAOs.FoodDAO;
 import DAOs.FoodTypeDAO;
+import DAOs.OrderDAO;
 import Models.Food;
 import Models.FoodType;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Date;
 
 /**
  *
@@ -25,12 +25,14 @@ public class Testing {
     public static void main(String[] args) throws SQLException {
 
         // TODO code application logic here
-       test2();
+        OrderDAO orderDAO = new OrderDAO();
+        FoodType ft = new FoodType();
+        System.out.println(ft.getId());
 
     }
     
     public void test1(){
-         FoodTypeDAO foodTypeDAO = new FoodTypeDAO();
+        FoodTypeDAO foodTypeDAO = new FoodTypeDAO();
         ArrayList<FoodType> foodTypes = foodTypeDAO.searchAll();
         System.out.println("Utils.Testing.main()");
         FoodDAO foodDAO = new FoodDAO(foodTypes);
@@ -43,7 +45,7 @@ public class Testing {
     }
     
     public static void test2(){
-        System.out.println(Utils.getDate());
+        System.out.println(Utils.getSqlTimestamp());
     }
 
 }

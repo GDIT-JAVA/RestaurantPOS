@@ -8,8 +8,10 @@ package Controller;
 import DAOs.FoodDAO;
 import DAOs.FoodTypeDAO;
 import DAOs.OrderDAO;
+import DAOs.OrderDetailDAO;
 import Models.Food;
 import Models.FoodType;
+import Models.Order;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -27,7 +29,6 @@ public class OrderDetailController {
         FoodDAO foodDAO = new FoodDAO(foodTypes);
 
         //ArrayList<Food> foods = foodDAO.searchAll();
-
         Map<String, ArrayList<Food>> map = new HashMap();
 
         for (int i = 0; i < foodTypes.size(); i++) {
@@ -37,10 +38,29 @@ public class OrderDetailController {
         }
         return map;
     }
-    
-    public boolean createOrder(){
-        OrderDAO orderDAO = new OrderDAO();
-        
-        return true;
+
+    public Order createOrder(ArrayList<Food> orderedFoods) {
+        OrderDAO orderDao;
+        orderDao = new OrderDAO();
+
+        OrderDetailDAO orderDetailDao;
+        orderDetailDao = new OrderDetailDAO();
+
+        long latestOrderId;
+        latestOrderId = orderDao.create();
+
+        Order latestOrder = null;
+
+        //if new order is created
+        if (latestOrderId != 0) {
+            latestOrder = orderDao.searchById(latestOrderId);
+
+            for (Food food : orderedFoods) {
+
+                orderDetailDao.create(latestOrder, food);
+            }
+
+        }
+        return latestOrder;
     }
 }

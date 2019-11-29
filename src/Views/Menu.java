@@ -10,7 +10,6 @@ import Views.Order.OrderDetail;
 import Views.Order.OrderManagement;
 import Views.Report.Report;
 import Views.Setting.Setting;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -66,6 +65,8 @@ public class Menu extends javax.swing.JPanel {
         btnNewOrder = new MenuButton("New Order");
         btnNewOrder.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
+                //Clear data in orderDetail
+                orderDetail = new OrderDetail();
                 btnActionPerformed(evt, orderDetail);
             }
         });

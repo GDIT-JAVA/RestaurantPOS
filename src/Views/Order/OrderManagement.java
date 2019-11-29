@@ -5,6 +5,14 @@
  */
 package Views.Order;
 
+import Controller.OrderDetailController;
+import Controller.OrderManagementController;
+import Models.Order;
+import Views.Order.Components.OrderListButton;
+import java.util.ArrayList;
+import java.util.Map;
+import javax.swing.JButton;
+
 /**
  *
  * @author PPuarat
@@ -16,6 +24,7 @@ public class OrderManagement extends javax.swing.JPanel {
      */
     public OrderManagement() {
         initComponents();
+        init();
     }
 
     /**
@@ -27,30 +36,45 @@ public class OrderManagement extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jPanel1 = new javax.swing.JPanel();
 
-        jLabel1.setText("Order management");
+        setPreferredSize(new java.awt.Dimension(1200, 675));
+        setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.LINE_AXIS));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(178, 178, 178)
-                .addComponent(jLabel1)
-                .addContainerGap(129, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(132, 132, 132)
-                .addComponent(jLabel1)
-                .addContainerGap(154, Short.MAX_VALUE))
-        );
+        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jScrollPane1.setPreferredSize(new java.awt.Dimension(1200, 675));
+
+        jPanel1.setLayout(new java.awt.GridLayout(1, 1));
+        jScrollPane1.setViewportView(jPanel1);
+
+        add(jScrollPane1);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void init() {
+        orderManagementCon = new OrderManagementController();
+        displayOrder();
+    }
 
+    private void displayOrder() {
+        ArrayList<Order> orders;
+        orders = orderManagementCon.initOrderManagement();
+//        System.out.println("Size of orders: "+orders.size());
+        for (Order order : orders) {
+            JButton orderBtn = new OrderListButton(order.getId() + "");
+            System.out.println("Views.Order.OrderManagement.displayOrder()");
+            
+//            orderBtn.addActionListener((java.awt.event.ActionEvent evt) -> {
+//                //switchFoodPanel(evt, key);
+//            });
+            jPanel1.add(orderBtn);
+        }
+    }
+    OrderManagementController orderManagementCon;
+    Map<Long, JButton> orderBtnMap;
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }
