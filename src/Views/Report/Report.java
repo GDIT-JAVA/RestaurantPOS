@@ -17,6 +17,7 @@ public class Report extends javax.swing.JPanel {
     public Report() {
         initComponents();
         init();
+        initReport();
         
     }
 
@@ -77,25 +78,25 @@ public class Report extends javax.swing.JPanel {
             .addGroup(btnPanelLayout.createSequentialGroup()
                 .addGroup(btnPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(btnPanelLayout.createSequentialGroup()
-                        .addGap(50, 50, 50)
-                        .addGroup(btnPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane2)
-                            .addComponent(btnGenerate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(71, 71, 71)
+                        .addGroup(btnPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnGenerate)))
                     .addGroup(btnPanelLayout.createSequentialGroup()
-                        .addGap(19, 19, 19)
+                        .addGap(32, 32, 32)
                         .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(44, Short.MAX_VALUE))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
         btnPanelLayout.setVerticalGroup(
             btnPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btnPanelLayout.createSequentialGroup()
-                .addContainerGap(70, Short.MAX_VALUE)
+                .addGap(129, 129, 129)
                 .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnGenerate)
-                .addGap(103, 103, 103))
+                .addContainerGap(227, Short.MAX_VALUE))
         );
 
         add(btnPanel);
@@ -130,27 +131,27 @@ public class Report extends javax.swing.JPanel {
         detailPanelLayout.setHorizontalGroup(
             detailPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(detailPanelLayout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addComponent(label3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, detailPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(detailPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addGroup(detailPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 750, Short.MAX_VALUE)
                     .addGroup(detailPanelLayout.createSequentialGroup()
-                        .addGap(0, 183, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
-            .addGroup(detailPanelLayout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addComponent(label3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         detailPanelLayout.setVerticalGroup(
             detailPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, detailPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(label3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 433, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(detailPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -162,8 +163,9 @@ public class Report extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGenerateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerateActionPerformed
-        // TODO add your handling code here:
-        createReport(lstInterval.getSelectedValue());
+        // TODO add your handling code here
+        cleanReport();
+        createReportnyInterval(lstInterval.getSelectedValue());
     }//GEN-LAST:event_btnGenerateActionPerformed
 
     private void init(){
@@ -194,9 +196,7 @@ public class Report extends javax.swing.JPanel {
         reportDetailTable.setModel(reportDetailTableModel);
     }
     
-    public void createReport(String interval) {
-        
-        reportDetailTable.removeAll();
+    public void createReportnyInterval(String interval) {
         
         PaymentDAO paymentDao = new PaymentDAO();
         Utils utils = new Utils();
@@ -217,6 +217,37 @@ public class Report extends javax.swing.JPanel {
         
         txtTotal.setText(Double.toString(utils.caculateTotalPaid(payments)));
         reportDetailTableModel.addRow(rowData);
+    }
+    
+    public void initReport() {
+        
+        PaymentDAO paymentDao = new PaymentDAO();
+        Utils utils = new Utils();
+        ArrayList<Payment> payments = new ArrayList<>();
+        Object[] rowData = new Object[6];
+        
+        payments = paymentDao.searchAll();
+        txtTotal.setText(Double.toString(utils.caculateTotalPaid(payments))); 
+        
+        for(int i = 0; i<payments.size();i++){
+        rowData[0] = payments.get(i).getCreatedAt();
+        rowData[1] = payments.get(i).getID();
+        rowData[2] = payments.get(i).getOrder().getId();
+        rowData[3] = payments.get(i).getOrder().getCustomer().getId();
+        rowData[4] = payments.get(i).getOrder().getUser().getId();
+        rowData[5] = payments.get(i).getTotalPaid();
+        }
+        
+        txtTotal.setText(Double.toString(utils.caculateTotalPaid(payments)));
+        reportDetailTableModel.addRow(rowData);
+    }
+    
+    public void cleanReport(){
+    
+        for(int i = 0; i < reportDetailTableModel.getRowCount(); i++){
+                reportDetailTableModel.removeRow(i);
+            }
+    
     }
     
     DefaultTableModel reportDetailTableModel;
