@@ -56,7 +56,7 @@ public class Menu extends javax.swing.JPanel {
 
     private void init() {
         orderDetail = new OrderDetail();
-        orderManagement = new OrderManagement();
+        //orderManagement = new OrderManagement();
         report = new Report();
         setting = new Setting();
         //Set default page orderDetail
@@ -74,6 +74,7 @@ public class Menu extends javax.swing.JPanel {
         btnOrders = new MenuButton("Orders");
         btnOrders.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
+                orderManagement = new OrderManagement();
                 btnActionPerformed(evt, orderManagement);
             }
         });
