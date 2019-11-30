@@ -25,7 +25,7 @@ public final class Utils {
         return total;
     }
     
-    public static double caculateTotalPaid(ArrayList<Payment> payments){
+    public double caculateTotalPaid(ArrayList<Payment> payments){
         
         double total = 0; 
         for(int i = 0; i<payments.size();i++){
