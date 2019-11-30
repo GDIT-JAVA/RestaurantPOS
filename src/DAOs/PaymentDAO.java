@@ -23,10 +23,6 @@ public class PaymentDAO {
     private final static String TABLE = "payments";
     private OrderDAO orderDAO = new OrderDAO();
 
-    public PaymentDAO() {
-        System.out.println("DAOs.PaymentDAO.<init>()");
-    }
-
     public ArrayList<Payment> searchAll() {
 
         ArrayList<Payment> payments = new ArrayList<>();
@@ -75,8 +71,8 @@ public class PaymentDAO {
 
     }
 
-    public long create() {
-        long latestId = 0;
+    public boolean create(Order order, Double total) {
+        boolean isSuccess = false;
         int index = 1;
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -91,11 +87,11 @@ public class PaymentDAO {
             stmt = conn.prepareStatement(SQL, PreparedStatement.RETURN_GENERATED_KEYS);
 
             //set orderId
-            stmt.setLong(index++, 6);
+            stmt.setLong(index++, order.getId());
             //set date
             stmt.setTimestamp(index++, Utils.getSqlTimestamp());
             //set total
-            stmt.setDouble(index++, 0);
+            stmt.setDouble(index++, total);
             //set description
             stmt.setString(index++, "");
             //set is_active
@@ -103,11 +99,12 @@ public class PaymentDAO {
 
             //Check query   
             //System.out.println(stmt);
-            stmt.execute();
-            ResultSet rs = stmt.getGeneratedKeys();
-            if (rs.next()) {
+            int i = stmt.executeUpdate();
+            
+            if (i > 0) {
 
-                latestId = rs.getLong(1);
+                System.out.println("Success");
+                isSuccess = true;
             }
 
         } catch (SQLException e) {
@@ -116,7 +113,7 @@ public class PaymentDAO {
         } finally {
             PostgreSQLConnection.close(conn, stmt);
         }
-        return latestId;
+        return isSuccess;
     }
 
     private ArrayList<Payment> map(ResultSet rs) throws SQLException {

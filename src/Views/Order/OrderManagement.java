@@ -12,6 +12,8 @@ import Views.Order.Components.OrderListButton;
 import java.util.ArrayList;
 import java.util.Map;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 /**
  *
@@ -36,20 +38,24 @@ public class OrderManagement extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jPanel1 = new javax.swing.JPanel();
+        orderListScroll = new javax.swing.JScrollPane();
+        orderListPanel = new javax.swing.JPanel();
 
         setPreferredSize(new java.awt.Dimension(1200, 675));
-        setLayout(new javax.swing.BoxLayout(this, javax.swing.BoxLayout.LINE_AXIS));
+        setLayout(new java.awt.GridLayout(1, 1));
 
-        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        jScrollPane1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jScrollPane1.setPreferredSize(new java.awt.Dimension(1200, 675));
+        orderListScroll.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        orderListScroll.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        orderListScroll.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        orderListScroll.setMaximumSize(new java.awt.Dimension(1200, 32767));
+        orderListScroll.setPreferredSize(new java.awt.Dimension(1200, 675));
 
-        jPanel1.setLayout(new java.awt.GridLayout(1, 1));
-        jScrollPane1.setViewportView(jPanel1);
+        orderListPanel.setMaximumSize(new java.awt.Dimension(1000, 32767));
+        orderListPanel.setPreferredSize(new java.awt.Dimension(1000, 0));
+        orderListPanel.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 15, 20));
+        orderListScroll.setViewportView(orderListPanel);
 
-        add(jScrollPane1);
+        add(orderListScroll);
     }// </editor-fold>//GEN-END:initComponents
 
     private void init() {
@@ -60,21 +66,35 @@ public class OrderManagement extends javax.swing.JPanel {
     private void displayOrder() {
         ArrayList<Order> orders;
         orders = orderManagementCon.initOrderManagement();
-//        System.out.println("Size of orders: "+orders.size());
-        for (Order order : orders) {
-            JButton orderBtn = new OrderListButton(order.getId() + "");
-            System.out.println("Views.Order.OrderManagement.displayOrder()");
+
+        orders.stream().map((order) -> {
+            JButton orderBtn = new OrderListButton(order);
             
-//            orderBtn.addActionListener((java.awt.event.ActionEvent evt) -> {
-//                //switchFoodPanel(evt, key);
-//            });
-            jPanel1.add(orderBtn);
-        }
+            orderBtn.addActionListener((java.awt.event.ActionEvent evt) -> {
+                orderBtnActionPerformed(evt, order);
+            });
+            return orderBtn;
+        }).forEachOrdered((orderBtn) -> {
+            //Add a button to display panel
+            orderListPanel.add(orderBtn);
+        });
     }
+
+    private void orderBtnActionPerformed(java.awt.event.ActionEvent evt, Order selectedOrder) {
+        // TODO add your handling code here:
+        removeAll();
+        orderDetail = new OrderDetail(selectedOrder);
+        add(orderDetail);
+        repaint();
+        revalidate();
+        
+    }
+    
+    JPanel orderDetail;
     OrderManagementController orderManagementCon;
     Map<Long, JButton> orderBtnMap;
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JPanel orderListPanel;
+    private javax.swing.JScrollPane orderListScroll;
     // End of variables declaration//GEN-END:variables
 }

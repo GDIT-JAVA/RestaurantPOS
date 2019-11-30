@@ -66,7 +66,7 @@ public class OrderDetailDAO {
 
             conn = PostgreSQLConnection.connect();
 
-            String SQL = "SELECT id, first_name, last_name, phone, email, "
+            String SQL = "SELECT id, order_id, food_id, "
                     + "description, created_at, is_active "
                     + "FROM " + TABLE + " "
                     + "WHERE is_active=?;";
@@ -75,6 +75,38 @@ public class OrderDetailDAO {
 
             //set is_active
             stmt.setBoolean(1, true);
+
+            //Check query
+            //System.out.println(stmt);
+            ResultSet rs = stmt.executeQuery();
+            orderDetail = map(rs);
+
+        } catch (SQLException e) {
+            System.err.println(e.toString());
+        } finally {
+            PostgreSQLConnection.close(conn, stmt);
+        }
+        return orderDetail;
+    }
+    
+    public ArrayList<OrderDetail> searchByOrder(Order order) {
+        ArrayList<OrderDetail> orderDetail = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        try {
+
+            conn = PostgreSQLConnection.connect();
+
+            String SQL = "SELECT id, order_id, food_id, "
+                    + "description, created_at, is_active "
+                    + "FROM " + TABLE + " "
+                    + "WHERE is_active=? and order_id=?;";
+
+            stmt = conn.prepareStatement(SQL);
+            int index = 1;
+            //set is_active
+            stmt.setBoolean(index++, true);
+            stmt.setLong(index++, order.getId());
 
             //Check query
             //System.out.println(stmt);
@@ -112,7 +144,7 @@ public class OrderDetailDAO {
         user.setIsActive(rs.getBoolean("is_active"));
         user.setOrder(orderDao.searchById(rs.getLong("order_id")));
         user.setFood(foodDao.searchById(rs.getLong("food_id")));
-        user.setDescription(rs.getString("first_name"));
+        user.setDescription(rs.getString("description"));
 
         return user;
     }

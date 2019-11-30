@@ -76,6 +76,15 @@ public class Customer extends Human {
     public void setDescription(String description) {
         this.description = description;
     }
+    public String getFullName(){
+        return this.getFirstName() + " " + this.getLastName();
+    }
+
+    @Override
+    public String toString() {
+        return "Customer: " + this.getId() + " " + this.getFullName();
+    }
+    
     
     
 }

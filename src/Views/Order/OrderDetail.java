@@ -6,6 +6,7 @@
 package Views.Order;
 
 import Controller.OrderDetailController;
+import Controller.OrderManagementController;
 import Models.Food;
 import Models.Order;
 import Utils.Utils;
@@ -32,6 +33,25 @@ public class OrderDetail extends javax.swing.JPanel {
     public OrderDetail() {
         initComponents();
         init();
+    }
+
+    //Create from orderManagement
+    public OrderDetail(Order order) {
+        currentOrder = order;
+        initComponents();
+        init();
+
+        orderDetails = orderManagementCon.getOrderDetails(order);
+
+        orderDetails.forEach((Models.OrderDetail detail) -> {
+            orderFood(null, detail.getFood());
+        });
+
+        //Hide the order button
+        orderBtn.setVisible(false);
+        this.detailPanel.remove(orderBtn);
+        this.detailPanel.repaint();
+        this.detailPanel.revalidate();
     }
 
     /**
@@ -77,11 +97,6 @@ public class OrderDetail extends javax.swing.JPanel {
 
         paymentBtn.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         paymentBtn.setText("Pay");
-        paymentBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                paymentBtnActionPerformed(evt);
-            }
-        });
 
         lblTotal.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         lblTotal.setText("Total:");
@@ -143,8 +158,9 @@ public class OrderDetail extends javax.swing.JPanel {
         add(foodPanel);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void paymentBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_paymentBtnActionPerformed
+    public void paymentBtnAction(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
+
         if (showPaymentPanel) {
             this.remove(paymentPanel);
             this.add(foodTypePanel);
@@ -152,6 +168,8 @@ public class OrderDetail extends javax.swing.JPanel {
             this.repaint();
             this.revalidate();
         } else {
+            //Payment Pane
+            paymentPanel = new Payment(currentOrder, orderDetails, this);
             this.remove(foodTypePanel);
             this.remove(foodPanel);
             this.add(paymentPanel);
@@ -161,35 +179,59 @@ public class OrderDetail extends javax.swing.JPanel {
         }
 
         showPaymentPanel = !showPaymentPanel;
-    }//GEN-LAST:event_paymentBtnActionPerformed
+    }
 
+    //CREATE NEW ORDER
     private void orderBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_orderBtnActionPerformed
         // TODO add your handling code here:
-        currentOrder = orderDetailCon.createOrder(orderdFoods);
-        
-        if (currentOrder.getId() > 0) {
+        System.out.println(currentOrder == null);
+        if (currentOrder == null) {
 
-            JOptionPane.showMessageDialog(null, "Order created");
-            orderBtn.setVisible(false);
-            this.detailPanel.remove(orderBtn);
-            this.detailPanel.repaint();
-            this.detailPanel.revalidate();
+            currentOrder = orderDetailCon.createOrder(orderdFoods);
+            if (currentOrder.getId() > 0) {
+
+                JOptionPane.showMessageDialog(null, "Order Created!");
+                orderBtn.setVisible(false);
+                this.detailPanel.remove(orderBtn);
+                this.detailPanel.repaint();
+                this.detailPanel.revalidate();
+
+                //Init new payment pane with the order
+                orderDetails = orderManagementCon.getOrderDetails(currentOrder);
+                if (this.paymentPanel != null) {
+
+                    this.paymentPanel.removeAll();
+                    this.remove(this.paymentPanel);
+                }
+                this.paymentPanel = new Payment(currentOrder, orderDetails, this);
+                this.paymentPanel.repaint();
+                this.paymentPanel.revalidate();
+
+            }
         }
     }//GEN-LAST:event_orderBtnActionPerformed
 
     private void init() {
-        //Payment Pane
-        paymentPanel = new Payment();
+
         //If true = show Payment
         showPaymentPanel = false;
 
         orderDetailCon = new OrderDetailController();
+        orderManagementCon = new OrderManagementController();
         //Init foods
         displayFoods(orderDetailCon.loadFoods());
 
         orderdFoods = new ArrayList<>();
 
         //init table
+        initTable();
+
+        paymentBtn.addActionListener(((java.awt.event.ActionEvent evt) -> {
+            paymentBtnAction(evt);
+        }));
+    }
+
+    private void initTable() {
         orderDetailTableModel = new javax.swing.table.DefaultTableModel(
                 new Object[][]{},
                 new String[]{
@@ -234,19 +276,19 @@ public class OrderDetail extends javax.swing.JPanel {
             //Food's Panel for each foodType
             JPanel foodDisplayPanel = new FoodDisplayPanel();
 
-            for (Food food : map.get(key)) {
+            map.get(key).stream().map((food) -> {
 
-                //System.out.println(key + ":" + food.getFoodName());
                 JButton btnFood = new FoodButton(food.getFoodName());
+
                 btnFood.addActionListener((java.awt.event.ActionEvent evt) -> {
                     orderFood(evt, food);
                 });
                 //Use Later
                 foodBtnMap.put(food.getId(), btnFood);
-
+                return btnFood;
+            }).forEachOrdered((btnFood) -> {
                 foodDisplayPanel.add(btnFood);//TODO Switch between these panels
-
-            }
+            });
 
             //Food pane for each type of food
             foodPanelMap.put(key, foodDisplayPanel);
@@ -277,21 +319,23 @@ public class OrderDetail extends javax.swing.JPanel {
         rowData[1] = food.getPrice();
         orderDetailTableModel.addRow(rowData);
 
-        //Total Amount
-        lblTotalAmount.setText("$ " + Utils.calculateTotalPrice(orderdFoods));
         //Add foods in arrayList
         orderdFoods.add(food);
+        //Total Amount
+        lblTotalAmount.setText("$ " + Utils.calculateTotalPrice(orderdFoods));
 
     }
 
     Order currentOrder;
     Boolean showPaymentPanel;
-    ArrayList<JButton> foodTypesBTNList;
     Map<Long, JButton> foodBtnMap;
     Map<String, JPanel> foodPanelMap;
-    DefaultTableModel orderDetailTableModel;
+    ArrayList<JButton> foodTypesBTNList;
     ArrayList<Food> orderdFoods;
+    ArrayList<Models.OrderDetail> orderDetails;
+    DefaultTableModel orderDetailTableModel;
     OrderDetailController orderDetailCon;
+    OrderManagementController orderManagementCon;
     private javax.swing.JPanel paymentPanel;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel detailPanel;
