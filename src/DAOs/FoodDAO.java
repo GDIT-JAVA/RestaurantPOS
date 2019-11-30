@@ -25,7 +25,6 @@ public class FoodDAO {
 
     public FoodDAO(ArrayList<FoodType> foodTypes) {
         this.foodTypes = foodTypes;
-        System.out.println("DAOs.FoodDAO.<init>()");
     }
 
     public ArrayList<Food> searchAll() {

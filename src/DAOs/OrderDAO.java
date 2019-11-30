@@ -5,6 +5,7 @@
  */
 package DAOs;
 
+import Models.Customer;
 import Models.Order;
 import Utils.Utils;
 import java.sql.Connection;
@@ -64,6 +65,43 @@ public class OrderDAO {
         return latestId;
     }
 
+    public long updateCustomer(Order order, Customer customer) {
+        long latestId = 0;
+        int index = 1;
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        try {
+
+            conn = PostgreSQLConnection.connect();
+
+            String SQL = "UPDATE " + TABLE + " "
+                    + "SET customer_id=? "
+                    + "WHERE id=?;";
+
+            stmt = conn.prepareStatement(SQL, PreparedStatement.RETURN_GENERATED_KEYS);
+
+            //set customer. 6 means INTEGER
+            stmt.setLong(index++, customer.getId());
+            //where orderID =
+            stmt.setLong(index++, order.getId());
+
+            //Check query   
+            //System.out.println(stmt);
+            stmt.execute();
+            ResultSet rs = stmt.getGeneratedKeys();
+            if (rs.next()) {
+
+                latestId = rs.getLong(1);
+            }
+
+        } catch (SQLException e) {
+            System.err.println(e.toString());
+        } finally {
+            PostgreSQLConnection.close(conn, stmt);
+        }
+        return latestId;
+    }
+
     public ArrayList<Order> searchAll() {
         ArrayList<Order> orders = new ArrayList<>();
         Connection conn = null;
@@ -102,20 +140,22 @@ public class OrderDAO {
 
             conn = PostgreSQLConnection.connect();
             //TODO Find unpaid orders
-            String SQL = "SELECT id, customer_id, user_id, is_takeaway, created_at, is_active "
-                    + "FROM " + TABLE + " "
-                    + "WHERE is_active=?;";
+            String SQL = "select o.* "
+                    + "from orders o "
+                    + "left join payments p on o.id = p.order_id "
+                    + "where p.order_id is null "
+                    + "and o.is_active = ?;";
 
             stmt = conn.prepareStatement(SQL);
-
+            int index = 1;
             //set is_active
-            stmt.setBoolean(1, true);
+            stmt.setBoolean(index++, true);
 
             //Check query
-            System.out.println(stmt);
+//            System.out.println(stmt);
             ResultSet rs = stmt.executeQuery();
             orders = map(rs);
-            System.out.println("Size of orders: " + orders.size());
+
         } catch (SQLException e) {
             System.err.println(e.toString());
             e.printStackTrace();
