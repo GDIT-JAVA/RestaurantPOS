@@ -8,6 +8,7 @@ package Views.Setting;
 
 import DAOs.FoodDAO;
 import DAOs.FoodTypeDAO;
+import Models.Food;
 import Models.FoodType;
 import Utils.Settings;
 import java.util.ArrayList;
@@ -19,6 +20,8 @@ import javax.swing.JOptionPane;
  * @author patricia.garcia
  */
 public class MenuAddFrame extends javax.swing.JFrame {
+    
+    public long aux;
 
     /**
      * Creates new form MenuAddFrame
@@ -158,13 +161,12 @@ public class MenuAddFrame extends javax.swing.JFrame {
      String price = txtPrice.getText();
      String category = lstFoodTypes.getSelectedValue();
      
-     
      FoodTypeDAO foodTypeDao = new FoodTypeDAO();
      ArrayList<FoodType> foodTypes = new ArrayList<>();
      foodTypes = foodTypeDao.searchAll();
      FoodDAO foodDao = new FoodDAO(foodTypes);
-     
-     foodDao.addFood(foodName, description, price, category);
+             
+     foodDao.addMenu(foodName, description, price, category);
      
      txtFood.setText(null);
      txtDescription.setText(null);
@@ -184,7 +186,7 @@ public class MenuAddFrame extends javax.swing.JFrame {
      
      for(int i = 0; i < foodTypes.size() ; i++){
      
-         defaultListModel.addElement(foodTypes.get(i).getTypeName());
+         defaultListModel.addElement(foodTypes.get(i).getId());
      
      }
      
