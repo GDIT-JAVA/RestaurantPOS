@@ -39,7 +39,7 @@ public class CategoriesAddFrame extends javax.swing.JFrame {
         lblCategory = new javax.swing.JLabel();
         txtCategory = new javax.swing.JTextField();
 
-        setTitle("Add New Customer");
+        setTitle("Add New Category");
 
         lblDescription.setText("Description");
 
