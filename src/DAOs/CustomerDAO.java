@@ -11,6 +11,12 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Calendar;
+import java.util.Date;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -19,6 +25,9 @@ import java.sql.PreparedStatement;
 public class CustomerDAO {
 
     private final static String TABLE = "customers";
+    DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");  
+    Date date = Calendar.getInstance().getTime();
+    
 
     public ArrayList<Customer> searchAll() {
         ArrayList<Customer> customers = new ArrayList<>();
@@ -49,6 +58,41 @@ public class CustomerDAO {
             PostgreSQLConnection.close(conn, stmt);
         }
         return customers;
+    }
+    
+    public void addCustomer(String fName, String lName, String phone, String email, String description){
+        
+        LocalDate localDate = LocalDate.now();
+        
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        try {
+
+            conn = PostgreSQLConnection.connect();
+
+            String SQL = "INSERT INTO public.customers (first_name,last_name,phone,email,description,created_at,is_active) VALUES"
+                    + " (?,?,?,?,?,?,?); ";
+
+            stmt = conn.prepareStatement(SQL);
+            
+            stmt.setString(1, fName);
+            stmt.setString(2, lName);
+            stmt.setString(3, phone);
+            stmt.setString(4, email);
+            stmt.setString(5, description);
+            stmt.setObject(6, localDate);
+            stmt.setBoolean(7, true);
+            
+            stmt.executeUpdate();
+            
+        }
+        catch (SQLException e) {
+            System.err.println(e.toString());
+            JOptionPane.showMessageDialog(null, 
+                    e.toString());
+        } finally {
+            PostgreSQLConnection.close(conn, stmt);
+        }
     }
 
     public Customer searchById(long id) {

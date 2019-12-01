@@ -37,7 +37,7 @@ public class Report extends javax.swing.JPanel {
         lstInterval = new javax.swing.JList<>();
         label1 = new java.awt.Label();
         detailPanel = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        tableCointainerSPanel = new javax.swing.JScrollPane();
         reportDetailTable = new javax.swing.JTable();
         label2 = new java.awt.Label();
         label3 = new java.awt.Label();
@@ -103,7 +103,7 @@ public class Report extends javax.swing.JPanel {
 
         detailPanel.setBackground(new java.awt.Color(255, 255, 204));
 
-        jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        tableCointainerSPanel.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
         reportDetailTable.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         reportDetailTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -118,7 +118,7 @@ public class Report extends javax.swing.JPanel {
         reportDetailTable.setAutoscrolls(false);
         reportDetailTable.setMaximumSize(new java.awt.Dimension(0, 2000));
         reportDetailTable.setRowHeight(25);
-        jScrollPane1.setViewportView(reportDetailTable);
+        tableCointainerSPanel.setViewportView(reportDetailTable);
 
         label2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         label2.setText("Total earnings:");
@@ -137,7 +137,7 @@ public class Report extends javax.swing.JPanel {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, detailPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(detailPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 750, Short.MAX_VALUE)
+                    .addComponent(tableCointainerSPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 750, Short.MAX_VALUE)
                     .addGroup(detailPanelLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -151,7 +151,7 @@ public class Report extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(label3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 433, Short.MAX_VALUE)
+                .addComponent(tableCointainerSPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 433, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(detailPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -165,7 +165,7 @@ public class Report extends javax.swing.JPanel {
     private void btnGenerateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerateActionPerformed
         // TODO add your handling code here
         cleanReport();
-        createReportnyInterval(lstInterval.getSelectedValue());
+        createReportInterval(lstInterval.getSelectedValue());
     }//GEN-LAST:event_btnGenerateActionPerformed
 
     private void init(){
@@ -196,7 +196,7 @@ public class Report extends javax.swing.JPanel {
         reportDetailTable.setModel(reportDetailTableModel);
     }
     
-    public void createReportnyInterval(String interval) {
+    public void createReportInterval(String interval) {
         
         PaymentDAO paymentDao = new PaymentDAO();
         Utils utils = new Utils();
@@ -207,46 +207,50 @@ public class Report extends javax.swing.JPanel {
         txtTotal.setText(Double.toString(utils.caculateTotalPaid(payments))); 
         
         for(int i = 0; i<payments.size();i++){
-        rowData[0] = payments.get(i).getCreatedAt();
-        rowData[1] = payments.get(i).getID();
-        rowData[2] = payments.get(i).getOrder().getId();
-        rowData[3] = payments.get(i).getOrder().getCustomer().getId();
-        rowData[4] = payments.get(i).getOrder().getUser().getId();
-        rowData[5] = payments.get(i).getTotalPaid();
+            
+            rowData[0] = payments.get(i).getCreatedAt();
+            rowData[1] = payments.get(i).getId();
+            rowData[2] = payments.get(i).getOrder().getId();
+            rowData[3] = payments.get(i).getOrder().getCustomer().getId();
+            rowData[4] = payments.get(i).getOrder().getUser().getId();
+            rowData[5] = payments.get(i).getTotalPaid();
+            reportDetailTableModel.addRow(rowData);
         }
         
         txtTotal.setText(Double.toString(utils.caculateTotalPaid(payments)));
-        reportDetailTableModel.addRow(rowData);
+        
     }
     
     public void initReport() {
         
         PaymentDAO paymentDao = new PaymentDAO();
         Utils utils = new Utils();
-        ArrayList<Payment> payments = new ArrayList<>();
+        ArrayList<Payment> paymentss = new ArrayList<>();
         Object[] rowData = new Object[6];
         
-        payments = paymentDao.searchAll();
-        txtTotal.setText(Double.toString(utils.caculateTotalPaid(payments))); 
+        paymentss = paymentDao.searchAll();
+        txtTotal.setText(Double.toString(utils.caculateTotalPaid(paymentss))); 
         
-        for(int i = 0; i<payments.size();i++){
-        rowData[0] = payments.get(i).getCreatedAt();
-        rowData[1] = payments.get(i).getID();
-        rowData[2] = payments.get(i).getOrder().getId();
-        rowData[3] = payments.get(i).getOrder().getCustomer().getId();
-        rowData[4] = payments.get(i).getOrder().getUser().getId();
-        rowData[5] = payments.get(i).getTotalPaid();
+        for(int i = 0; i<paymentss.size();i++){
+            rowData[0] = paymentss.get(i).getCreatedAt();
+            rowData[1] = paymentss.get(i).getId();
+            rowData[2] = paymentss.get(i).getOrder().getId();
+            rowData[3] = paymentss.get(i).getOrder().getCustomer().getId();
+            rowData[4] = paymentss.get(i).getOrder().getUser().getId();
+            rowData[5] = paymentss.get(i).getTotalPaid();
+            reportDetailTableModel.addRow(rowData);
         }
         
-        txtTotal.setText(Double.toString(utils.caculateTotalPaid(payments)));
-        reportDetailTableModel.addRow(rowData);
+        txtTotal.setText(Double.toString(utils.caculateTotalPaid(paymentss)));
     }
     
     public void cleanReport(){
-    
-        for(int i = 0; i < reportDetailTableModel.getRowCount(); i++){
-                reportDetailTableModel.removeRow(i);
-            }
+        
+          if (reportDetailTableModel.getRowCount() > 0) {
+            for (int i = reportDetailTableModel.getRowCount() - 1; i > -1; i--) {
+            reportDetailTableModel.removeRow(i);
+    }
+}
     
     }
     
@@ -255,13 +259,13 @@ public class Report extends javax.swing.JPanel {
     private javax.swing.JButton btnGenerate;
     private javax.swing.JPanel btnPanel;
     private javax.swing.JPanel detailPanel;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private java.awt.Label label1;
     private java.awt.Label label2;
     private java.awt.Label label3;
     private javax.swing.JList<String> lstInterval;
     private javax.swing.JTable reportDetailTable;
+    private javax.swing.JScrollPane tableCointainerSPanel;
     private javax.swing.JTextField txtTotal;
     // End of variables declaration//GEN-END:variables
 }

@@ -124,7 +124,7 @@ public class PaymentDAO {
 
             Payment payment = new Payment();
 
-            payment.setID(rs.getLong("id"));
+            payment.setId(rs.getLong("id"));
             payment.setOrder(orderDAO.searchById(rs.getLong("order_id")));
             payment.setCreatedAt(rs.getString("created_at"));
             payment.setTotalPaid(rs.getDouble("total"));
