@@ -209,7 +209,7 @@ public class Report extends javax.swing.JPanel {
         for(int i = 0; i<payments.size();i++){
             
             rowData[0] = payments.get(i).getCreatedAt();
-            rowData[1] = payments.get(i).getID();
+            rowData[1] = payments.get(i).getId();
             rowData[2] = payments.get(i).getOrder().getId();
             rowData[3] = payments.get(i).getOrder().getCustomer().getId();
             rowData[4] = payments.get(i).getOrder().getUser().getId();
@@ -233,7 +233,7 @@ public class Report extends javax.swing.JPanel {
         
         for(int i = 0; i<paymentss.size();i++){
             rowData[0] = paymentss.get(i).getCreatedAt();
-            rowData[1] = paymentss.get(i).getID();
+            rowData[1] = paymentss.get(i).getId();
             rowData[2] = paymentss.get(i).getOrder().getId();
             rowData[3] = paymentss.get(i).getOrder().getCustomer().getId();
             rowData[4] = paymentss.get(i).getOrder().getUser().getId();
