@@ -47,7 +47,7 @@ public class UserAddFrame extends javax.swing.JFrame {
         txtUser = new javax.swing.JTextField();
         txtPassword = new javax.swing.JPasswordField();
 
-        setTitle("Add New Customer");
+        setTitle("Add New User");
 
         LabelFName.setText("First Name");
 

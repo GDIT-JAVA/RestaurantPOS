@@ -77,6 +77,41 @@ public class FoodDAO {
         }
         return foods;
     }
+    
+      public void addMenu(String foodName, String description, String price, String category){
+        
+        LocalDate localDate = LocalDate.now();
+        
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        try {
+
+            conn = PostgreSQLConnection.connect();
+
+            String SQL = "INSERT INTO public.foods (food_name,description,created_at,price,is_active,type_id) VALUES"
+                    + " (?,?,?,?,?,?); ";
+
+            stmt = conn.prepareStatement(SQL);
+            stmt.setString(1, foodName);
+            stmt.setString(2, description);
+            stmt.setObject(3, localDate);
+            stmt.setString(4, price);
+            stmt.setBoolean(5, true);
+            stmt.setString(6, category);
+    
+            
+            stmt.executeUpdate();
+            
+        }
+        catch (SQLException e) {
+            System.err.println(e.toString());
+            JOptionPane.showMessageDialog(null, 
+                    e.toString());
+        } 
+        finally {
+            PostgreSQLConnection.close(conn, stmt);
+        }
+    }
 
     public Food searchById(Long foodId) {
 
@@ -136,7 +171,7 @@ public class FoodDAO {
         return food;
     }
 
-    private FoodType mapFoodType(long foodTypeId) {
+    public FoodType mapFoodType(long foodTypeId) {
 
         for (FoodType foodType : this.foodTypes) {
             if (foodType.getId() == foodTypeId) {
@@ -147,45 +182,9 @@ public class FoodDAO {
         return null;
     }
     
-    private void addMenu(String foodName, String description, String price, String category ){
-         LocalDate localDate = LocalDate.now();
-        
-        Connection conn = null;
-        PreparedStatement stmt = null;
-        try {
-
-            conn = PostgreSQLConnection.connect();
-
-            String SQL = "INSERT INTO public.customers (food_name,description,price,type_id) VALUES"
-                    + " (?,?,?,?,?,?,?); ";
-
-            stmt = conn.prepareStatement(SQL);
-            
-            stmt.setString(1, foodName);
-            stmt.setString(2, description);
-            stmt.setString(3, price);
-            stmt.setString(4, category);
-     
-            
-            stmt.executeUpdate();
-            
-        }
-        catch (SQLException e) {
-            System.err.println(e.toString());
-            JOptionPane.showMessageDialog(null, 
-                    e.toString());
-        } finally {
-            PostgreSQLConnection.close(conn, stmt);
-        }
     
     
-    
-    
-    
-    
-    }
-
     public void addFood(String foodName, String description, String price, String category) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

@@ -62,6 +62,11 @@ public class CustomerPanel extends javax.swing.JPanel {
         });
 
         BtnUpdateCustomer.setText("Update");
+        BtnUpdateCustomer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnUpdateCustomerActionPerformed(evt);
+            }
+        });
 
         BtnDeleteCustomer.setText("Delete");
 
@@ -101,6 +106,11 @@ public class CustomerPanel extends javax.swing.JPanel {
         //setLayout(new BorderLayout());
         new CustomerAddFrame().setVisible(true);
     }//GEN-LAST:event_BtnAddCustomerActionPerformed
+
+    private void BtnUpdateCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnUpdateCustomerActionPerformed
+        // TODO add your handling code here:
+        new CustomerUpdateFrame().setVisible(true);
+    }//GEN-LAST:event_BtnUpdateCustomerActionPerformed
 
     
         public void init(){
