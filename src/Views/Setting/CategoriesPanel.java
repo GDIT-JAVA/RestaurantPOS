@@ -5,6 +5,11 @@
  */
 package Views.Setting;
 
+import DAOs.FoodTypeDAO;
+import Models.FoodType;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author rodrigo.garcia
@@ -16,6 +21,8 @@ public class CategoriesPanel extends javax.swing.JPanel {
      */
     public CategoriesPanel() {
         initComponents();
+        init();
+        initCategories();
     }
 
     /**
@@ -28,37 +35,28 @@ public class CategoriesPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPane2 = new javax.swing.JScrollPane();
-        TableCategories = new javax.swing.JTable();
+        tableCategories = new javax.swing.JTable();
         BtnAddCategories = new javax.swing.JButton();
         BtnUpdateCategories = new javax.swing.JButton();
         BtnDeleteCategories = new javax.swing.JButton();
 
-        setBackground(new java.awt.Color(187, 187, 187));
+        setBackground(new java.awt.Color(255, 255, 204));
         setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setPreferredSize(new java.awt.Dimension(700, 700));
 
+        jScrollPane2.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         jScrollPane2.setPreferredSize(new java.awt.Dimension(500, 500));
 
-        TableCategories.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        TableCategories.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
-            },
-            new String [] {
-                "Category Name", "Description"
-            }
-        ));
-        jScrollPane2.setViewportView(TableCategories);
+        tableCategories.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jScrollPane2.setViewportView(tableCategories);
 
         BtnAddCategories.setText("Add");
+        BtnAddCategories.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnAddCategoriesActionPerformed(evt);
+            }
+        });
 
         BtnUpdateCategories.setText("Update");
         BtnUpdateCategories.setToolTipText("");
@@ -80,29 +78,29 @@ public class CategoriesPanel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(222, 222, 222)
+                .addGap(213, 213, 213)
                 .addComponent(BtnAddCategories, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(BtnUpdateCategories, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(BtnUpdateCategories, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(BtnDeleteCategories, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(213, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 686, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 416, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BtnAddCategories, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BtnUpdateCategories, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(BtnDeleteCategories, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(204, Short.MAX_VALUE))
+                .addContainerGap(207, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -114,12 +112,75 @@ public class CategoriesPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_BtnDeleteCategoriesActionPerformed
 
+    private void BtnAddCategoriesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAddCategoriesActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BtnAddCategoriesActionPerformed
+    
+    //Init the table with a default table
+    public void init(){
+    defaultTableModel = new javax.swing.table.DefaultTableModel(
+            
+            //Default table configurations
+            new Object [][]{},
+            new String[]{
+                "ID", "Category Name", "Description"
+            }
+    ) 
+            {
+            Class[] types = new Class[]{
+                java.lang.String.class,java.lang.String.class,java.lang.String.class,
+            };
+            boolean[] canEdit = new boolean[]{
+                false, false,false
+            };
+            
+            public Class getColumnClass(int columnIndex) {
+                return types[columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit[columnIndex];
+            }
+        
+        };
+    //Add vaues to the panel table
+    tableCategories.setModel(defaultTableModel);
+}
+    
+    
+    
+    
+    
+    public void initCategories(){
+        
+        
+        FoodTypeDAO foodTypeDao = new FoodTypeDAO();
+        ArrayList<FoodType> foodTypes = new ArrayList<>();
+        Object[] rowData = new Object[3];
+        
+        foodTypes = foodTypeDao.searchAll();
+        
+       
+        
+        for(int i = 0; i<foodTypes.size();i++){
+        rowData[0] = foodTypes.get(i).getId();
+        rowData[1] = foodTypes.get(i).getTypeName();
+        rowData[2] = foodTypes.get(i).getDescription();
+        defaultTableModel.addRow(rowData);
+        }
+        
+
+    
+    }
+    
+
+DefaultTableModel defaultTableModel;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnAddCategories;
     private javax.swing.JButton BtnDeleteCategories;
     private javax.swing.JButton BtnUpdateCategories;
-    private javax.swing.JTable TableCategories;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable tableCategories;
     // End of variables declaration//GEN-END:variables
 }

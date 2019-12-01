@@ -5,6 +5,13 @@
  */
 package Views.Setting;
 
+import DAOs.FoodTypeDAO;
+import DAOs.UserDAO;
+import Models.FoodType;
+import Models.User;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author rodrigo.garcia
@@ -16,6 +23,8 @@ public class UserPanel extends javax.swing.JPanel {
      */
     public UserPanel() {
         initComponents();
+        init();
+        initUsers();
     }
 
     /**
@@ -28,51 +37,47 @@ public class UserPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        tableUser = new javax.swing.JTable();
+        javax.swing.JButton BtnAddUSer = new javax.swing.JButton();
+        BtnUpdateUSer = new javax.swing.JButton();
+        BtnDeleteUSer = new javax.swing.JButton();
 
-        setBackground(new java.awt.Color(187, 187, 187));
+        setBackground(new java.awt.Color(255, 255, 204));
         setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         setPreferredSize(new java.awt.Dimension(1500, 1500));
 
-        jTable1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
-            },
-            new String [] {
-                "Name", "Surname", "Email", "Address", "Postcode", "Role"
+        jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+
+        tableUser.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        jScrollPane1.setViewportView(tableUser);
+
+        BtnAddUSer.setText("Add");
+        BtnAddUSer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnAddUSerActionPerformed(evt);
             }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        });
 
-        jButton1.setText("Add");
+        BtnUpdateUSer.setText("Update");
 
-        jButton2.setText("Update");
-
-        jButton3.setText("Delete");
+        BtnDeleteUSer.setText("Delete");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(228, 228, 228)
+                .addComponent(BtnAddUSer, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(BtnUpdateUSer, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(BtnDeleteUSer, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(201, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1)
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(222, 222, 222)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(210, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -81,19 +86,90 @@ public class UserPanel extends javax.swing.JPanel {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(1004, Short.MAX_VALUE))
+                    .addComponent(BtnDeleteUSer, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BtnUpdateUSer, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BtnAddUSer, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(991, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void BtnAddUSerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAddUSerActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BtnAddUSerActionPerformed
+
+    
+        //Init the table with a default table
+    public void init(){
+    defaultTableModel = new javax.swing.table.DefaultTableModel(
+            
+            //Default table configurations
+            new Object [][]{},
+            new String[]{
+                "User id", "User Name", "Password", "First Name", "Last Name","Phone","Email", "Created at", "Is Active"
+            }
+    ) 
+            {
+            Class[] types = new Class[]{
+                java.lang.String.class,java.lang.String.class,java.lang.String.class,java.lang.String.class,
+                java.lang.String.class,java.lang.String.class,java.lang.String.class,java.lang.String.class,
+                java.lang.String.class
+            };
+            boolean[] canEdit = new boolean[]{
+                false,false,false,false,false,false,false,false,false
+            };
+            
+            public Class getColumnClass(int columnIndex) {
+                return types[columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit[columnIndex];
+            }
+        
+        };
+    //Add vaues to the panel table
+    tableUser.setModel(defaultTableModel);
+}
+    
+    
+    
+    
+    
+    public void initUsers(){
+        
+        
+        UserDAO userDao = new UserDAO();
+        ArrayList<User> users = new ArrayList<>();
+        Object[] rowData = new Object[9];
+        
+        users = userDao.searchAll();
+        
+       
+        
+        for(int i = 0; i<users.size();i++){
+        rowData[0] = users.get(i).getId();
+        rowData[1] = users.get(i).getUserName();
+        rowData[2] = users.get(i).getPassword();
+        rowData[3] = users.get(i).getFirstName();
+        rowData[4] = users.get(i).getLastName();
+        rowData[5] = users.get(i).getPhone();
+        rowData[6] = users.get(i).getEmail();
+        rowData[7] = users.get(i).getCreatedAt();
+        rowData[8] = users.get(i).isIsActive();
+        defaultTableModel.addRow(rowData);
+        }
+        
+
+    
+    }
+    
+
+DefaultTableModel defaultTableModel;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton BtnDeleteUSer;
+    private javax.swing.JButton BtnUpdateUSer;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tableUser;
     // End of variables declaration//GEN-END:variables
 }

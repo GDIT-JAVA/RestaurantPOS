@@ -30,20 +30,15 @@ public class Setting extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        dataPanel = new javax.swing.JPanel();
         optionsPanel = new javax.swing.JPanel();
         btnCustomers = new javax.swing.JButton();
         btnUsers = new javax.swing.JButton();
         btnCategories = new javax.swing.JButton();
-        javax.swing.JButton btnMenufood = new javax.swing.JButton();
+        btnMenufood = new javax.swing.JButton();
+        dataPanel = new javax.swing.JPanel();
 
-        dataPanel.setBackground(new java.awt.Color(187, 187, 187));
-        dataPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
-        dataPanel.setPreferredSize(new java.awt.Dimension(1500, 1500));
-        dataPanel.setLayout(new javax.swing.BoxLayout(dataPanel, javax.swing.BoxLayout.LINE_AXIS));
-
-        optionsPanel.setBackground(new java.awt.Color(180, 180, 180));
+        optionsPanel.setBackground(new java.awt.Color(255, 255, 255));
+        optionsPanel.setMaximumSize(new java.awt.Dimension(3267, 3267));
         optionsPanel.setPreferredSize(new java.awt.Dimension(700, 700));
 
         btnCustomers.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
@@ -82,85 +77,51 @@ public class Setting extends javax.swing.JPanel {
         optionsPanel.setLayout(optionsPanelLayout);
         optionsPanelLayout.setHorizontalGroup(
             optionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(optionsPanelLayout.createSequentialGroup()
-                .addGap(87, 87, 87)
-                .addGroup(optionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnMenufood, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnCategories, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnCustomers, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnUsers, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(74, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, optionsPanelLayout.createSequentialGroup()
+                .addContainerGap(72, Short.MAX_VALUE)
+                .addGroup(optionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnMenufood, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnUsers, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCustomers, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCategories, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24))
         );
         optionsPanelLayout.setVerticalGroup(
             optionsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(optionsPanelLayout.createSequentialGroup()
-                .addGap(73, 73, 73)
+                .addGap(48, 48, 48)
                 .addComponent(btnCustomers, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnUsers, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnCategories, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnMenufood, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(82, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        dataPanel.setBackground(new java.awt.Color(255, 255, 204));
+        dataPanel.setPreferredSize(new java.awt.Dimension(1500, 1500));
+        dataPanel.setLayout(new javax.swing.BoxLayout(dataPanel, javax.swing.BoxLayout.LINE_AXIS));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(27, 27, 27)
-                .addComponent(optionsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(dataPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 777, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(1635, 1635, 1635)
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(optionsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(dataPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(1, 1, 1))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(6, 6, 6)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(dataPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 531, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(optionsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 529, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(400, 400, 400)))
-                .addGap(0, 12, Short.MAX_VALUE))
+                .addComponent(dataPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(optionsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 1500, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnCustomersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCustomersActionPerformed
-        // TODO add your handling code here:
-        CustomerPanel obj = new CustomerPanel();
-        //setLayout(new BorderLayout());
-        dataPanel.removeAll();
-        dataPanel.add(obj);//3rd argument is index
-        dataPanel.repaint();
-        dataPanel.revalidate();
-    }//GEN-LAST:event_btnCustomersActionPerformed
-
-    private void btnUsersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUsersActionPerformed
-        // TODO add your handling code here:
-        UserPanel obj = new UserPanel();
-        //setLayout(new BorderLayout());
-        dataPanel.removeAll();
-        dataPanel.add(obj);//3rd argument is index
-        dataPanel.repaint();
-        dataPanel.revalidate();
-    }//GEN-LAST:event_btnUsersActionPerformed
-
-    private void btnCategoriesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCategoriesActionPerformed
-        // TODO add your handling code here:
-        CategoriesPanel obj = new CategoriesPanel();
-        //setLayout(new BorderLayout());
-        dataPanel.removeAll();
-        dataPanel.add(obj);//3rd argument is index
-        dataPanel.repaint();
-        dataPanel.revalidate();
-    }//GEN-LAST:event_btnCategoriesActionPerformed
 
     private void btnMenufoodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenufoodActionPerformed
         // TODO add your handling code here:
@@ -173,13 +134,43 @@ public class Setting extends javax.swing.JPanel {
         dataPanel.revalidate();
     }//GEN-LAST:event_btnMenufoodActionPerformed
 
+    private void btnCategoriesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCategoriesActionPerformed
+        // TODO add your handling code here:
+        CategoriesPanel obj = new CategoriesPanel();
+        //setLayout(new BorderLayout());
+        dataPanel.removeAll();
+        dataPanel.add(obj);//3rd argument is index
+        dataPanel.repaint();
+        dataPanel.revalidate();
+    }//GEN-LAST:event_btnCategoriesActionPerformed
+
+    private void btnUsersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUsersActionPerformed
+        // TODO add your handling code here:
+        UserPanel obj = new UserPanel();
+        //setLayout(new BorderLayout());
+        dataPanel.removeAll();
+        dataPanel.add(obj);//3rd argument is index
+        dataPanel.repaint();
+        dataPanel.revalidate();
+    }//GEN-LAST:event_btnUsersActionPerformed
+
+    private void btnCustomersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCustomersActionPerformed
+        // TODO add your handling code here:
+        CustomerPanel obj = new CustomerPanel();
+        //setLayout(new BorderLayout());
+        dataPanel.removeAll();
+        dataPanel.add(obj);//3rd argument is index
+        dataPanel.repaint();
+        dataPanel.revalidate();
+    }//GEN-LAST:event_btnCustomersActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCategories;
     private javax.swing.JButton btnCustomers;
+    private javax.swing.JButton btnMenufood;
     private javax.swing.JButton btnUsers;
-    private javax.swing.JPanel dataPanel;
-    private javax.swing.JLabel jLabel1;
+    public javax.swing.JPanel dataPanel;
     private javax.swing.JPanel optionsPanel;
     // End of variables declaration//GEN-END:variables
 }
