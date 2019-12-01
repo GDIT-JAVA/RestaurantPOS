@@ -39,7 +39,7 @@ public class CategoriesAddFrame extends javax.swing.JFrame {
         lblCategory = new javax.swing.JLabel();
         txtCategory = new javax.swing.JTextField();
 
-        setTitle("Add New Customer");
+        setTitle("Add New Category");
 
         lblDescription.setText("Description");
 
@@ -98,12 +98,15 @@ public class CategoriesAddFrame extends javax.swing.JFrame {
                 .addContainerGap(31, Short.MAX_VALUE))
         );
 
+        getAccessibleContext().setAccessibleName("Add New Category");
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
        // addCustomer(); 
+       addCategories();
         
     }//GEN-LAST:event_btnAddActionPerformed
 
@@ -115,13 +118,14 @@ public class CategoriesAddFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCloseActionPerformed
 
  public void addCategories(){
+     
      String category = txtCategory.getText();
      String description = txtDescription.getText();
 
      
      FoodTypeDAO foodTypeDao = new FoodTypeDAO();
      
-     //foodTypeDao.addFoodType(category, description);
+     foodTypeDao.addCategory(category, description);
      
      txtCategory.setText(null);
      txtDescription.setText(null);

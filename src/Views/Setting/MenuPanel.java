@@ -11,6 +11,7 @@ import Models.Food;
 import Models.FoodType;
 import Utils.Utils;
 import java.util.ArrayList;
+import javax.swing.DefaultListModel;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -97,7 +98,7 @@ public class MenuPanel extends javax.swing.JPanel {
 
     private void BtnAddMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAddMenuActionPerformed
         // TODO add your handling code here:
-        new UserAddFrame().setVisible(true);
+        new MenuAddFrame().setVisible(true);
     }//GEN-LAST:event_BtnAddMenuActionPerformed
 
 public void init(){
@@ -131,10 +132,10 @@ public void init(){
 }
 
     public void initMenu(){
+        
         FoodTypeDAO foodTypeDao = new FoodTypeDAO();
         ArrayList<FoodType> foodTypes = new ArrayList<>();
-        
-        
+        foodTypes = foodTypeDao.searchAll();
         FoodDAO foodDao = new FoodDAO(foodTypes);
         ArrayList<Food> foods = new ArrayList<>();
         Object[] rowData = new Object[5];
@@ -143,16 +144,15 @@ public void init(){
         
         
         for(int i = 0; i<foods.size();i++){
+            
         rowData[0] = foods.get(i).getId();
         rowData[1] = foods.get(i).getFoodName();
         rowData[2] = foods.get(i).getDescription();
         rowData[3] = foods.get(i).getPrice();
-        rowData[4] = foods.get(i).getFoodType();
+        rowData[4] = foods.get(i).getFoodType().getTypeName();
         defaultTableModel.addRow(rowData);
         }
         
-
-    
     }
     
 

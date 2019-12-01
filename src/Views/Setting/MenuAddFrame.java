@@ -11,6 +11,7 @@ import DAOs.FoodTypeDAO;
 import Models.FoodType;
 import Utils.Settings;
 import java.util.ArrayList;
+import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
 /**
@@ -24,6 +25,7 @@ public class MenuAddFrame extends javax.swing.JFrame {
      */
     public MenuAddFrame() {
         initComponents();
+        initList();
     }
 
     /**
@@ -40,25 +42,20 @@ public class MenuAddFrame extends javax.swing.JFrame {
         lblCategory = new javax.swing.JLabel();
         txtDescription = new javax.swing.JTextField();
         txtPrice = new javax.swing.JTextField();
-        txtCategory = new javax.swing.JTextField();
         btnAdd = new javax.swing.JButton();
         btnClose = new javax.swing.JButton();
         lblFood = new javax.swing.JLabel();
         txtFood = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        lstFoodTypes = new javax.swing.JList<>();
 
-        setTitle("Add New Customer");
+        setTitle("Add New Menu");
 
         lblDescription.setText("Description");
 
         lblPrice.setText("Price");
 
         lblCategory.setText("Category");
-
-        txtCategory.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCategoryActionPerformed(evt);
-            }
-        });
 
         btnAdd.setText("Add");
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
@@ -76,13 +73,19 @@ public class MenuAddFrame extends javax.swing.JFrame {
 
         lblFood.setText("Food Name");
 
+        jScrollPane1.setViewportView(lstFoodTypes);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(65, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnAdd)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnClose))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -94,16 +97,12 @@ public class MenuAddFrame extends javax.swing.JFrame {
                                     .addComponent(lblFood)
                                     .addComponent(lblCategory))
                                 .addGap(25, 25, 25)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtDescription, javax.swing.GroupLayout.DEFAULT_SIZE, 375, Short.MAX_VALUE)
-                            .addComponent(txtPrice)
-                            .addComponent(txtCategory)
-                            .addComponent(txtFood, javax.swing.GroupLayout.Alignment.TRAILING)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnAdd)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnClose)))
-                .addGap(49, 49, 49))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(txtDescription, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 375, Short.MAX_VALUE)
+                            .addComponent(txtPrice, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtFood)
+                            .addComponent(jScrollPane1))))
+                .addGap(205, 205, 205))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -121,15 +120,20 @@ public class MenuAddFrame extends javax.swing.JFrame {
                     .addComponent(lblPrice)
                     .addComponent(txtPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblCategory)
-                    .addComponent(txtCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnAdd)
-                    .addComponent(btnClose))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnAdd)
+                            .addComponent(btnClose))
+                        .addGap(53, 53, 53))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblCategory)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
+
+        getAccessibleContext().setAccessibleName("Add New Menu ");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -140,11 +144,6 @@ public class MenuAddFrame extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnAddActionPerformed
 
-    private void txtCategoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCategoryActionPerformed
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_txtCategoryActionPerformed
-
     private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
         // TODO add your handling code here:
 
@@ -153,18 +152,16 @@ public class MenuAddFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCloseActionPerformed
 
  public void addMenu(){
+     
      String foodName = txtFood.getText();
      String description = txtDescription.getText();
      String price = txtPrice.getText();
-     String category = txtCategory.getText();
+     String category = lstFoodTypes.getSelectedValue();
      
      
      FoodTypeDAO foodTypeDao = new FoodTypeDAO();
      ArrayList<FoodType> foodTypes = new ArrayList<>();
      foodTypes = foodTypeDao.searchAll();
-     
-     
-     
      FoodDAO foodDao = new FoodDAO(foodTypes);
      
      foodDao.addFood(foodName, description, price, category);
@@ -172,24 +169,43 @@ public class MenuAddFrame extends javax.swing.JFrame {
      txtFood.setText(null);
      txtDescription.setText(null);
      txtPrice.setText(null);
-     txtCategory.setText(null);
-
- 
+     lstFoodTypes.clearSelection();
  
  }
+ 
+ private void initList(){
+ 
+     FoodTypeDAO foodTypeDao = new FoodTypeDAO();
+     ArrayList<FoodType> foodTypes = new ArrayList<>();
+     defaultListModel = new DefaultListModel<String>();
+     
+     foodTypes = foodTypeDao.searchAll();
+     
+     
+     for(int i = 0; i < foodTypes.size() ; i++){
+     
+         defaultListModel.addElement(foodTypes.get(i).getTypeName());
+     
+     }
+     
+     lstFoodTypes.setModel(defaultListModel);
+    
+    }
 
     
-    
+    DefaultListModel defaultListModel;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnClose;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblCategory;
     private javax.swing.JLabel lblDescription;
     private javax.swing.JLabel lblFood;
     private javax.swing.JLabel lblPrice;
-    private javax.swing.JTextField txtCategory;
+    private javax.swing.JList<String> lstFoodTypes;
     private javax.swing.JTextField txtDescription;
     private javax.swing.JTextField txtFood;
     private javax.swing.JTextField txtPrice;
     // End of variables declaration//GEN-END:variables
 }
+
