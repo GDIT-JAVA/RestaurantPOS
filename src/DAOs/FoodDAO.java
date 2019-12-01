@@ -95,7 +95,7 @@ public class FoodDAO {
             stmt.setString(1, foodName);
             stmt.setString(2, description);
             stmt.setObject(3, localDate);
-            stmt.setString(4, price);
+            stmt.setDouble(4, Double.parseDouble(price));
             stmt.setBoolean(5, true);
             stmt.setString(6, category);
     
@@ -182,9 +182,15 @@ public class FoodDAO {
         return null;
     }
     
-    
-    
-    public void addFood(String foodName, String description, String price, String category) {
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public FoodType mapFoodTypeId(String foodTypeStr) {
+
+        for (FoodType foodType : this.foodTypes) {
+            if (foodType.getTypeName() == foodTypeStr) {
+                return foodType;
+            }
+        }
+
+        return null;
     }
+    
 }
