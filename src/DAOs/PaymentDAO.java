@@ -46,17 +46,17 @@ public class PaymentDAO {
 
     }
 
-    private ArrayList<Payment> searchByTimeInterval(String timeInterval) {
+    public ArrayList<Payment> searchByTimeInterval(String timeInterval) {
 
         ArrayList<Payment> payments = new ArrayList<>();
         try {
             Connection conn = PostgreSQLConnection.connect();
-            String SQL = "SELECT count(1) "
+            String SQL = "SELECT * "
                     + "FROM " + TABLE + " WHERE is_active = true "
-                    + " and created_at > now() - interval ?;";
-
+                    + "AND created_at > now() - ?::INTERVAL;";
+            
             PreparedStatement stmt = conn.prepareStatement(SQL);
-            stmt.setString(1, timeInterval);
+            stmt.setString(1, "\'" + timeInterval + "\'");
             ResultSet rs = stmt.executeQuery();
 
             payments = this.map(rs);
