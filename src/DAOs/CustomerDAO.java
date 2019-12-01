@@ -16,6 +16,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -87,6 +88,8 @@ public class CustomerDAO {
         }
         catch (SQLException e) {
             System.err.println(e.toString());
+            JOptionPane.showMessageDialog(null, 
+                    e.toString());
         } finally {
             PostgreSQLConnection.close(conn, stmt);
         }

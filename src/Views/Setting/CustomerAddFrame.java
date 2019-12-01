@@ -148,8 +148,7 @@ public class CustomerAddFrame extends javax.swing.JFrame {
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
         addCustomer(); 
-         JOptionPane.showMessageDialog(null, 
-                    "Succesfull");
+        
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void textPhoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textPhoneActionPerformed
@@ -174,6 +173,11 @@ public class CustomerAddFrame extends javax.swing.JFrame {
      
      customerDao.addCustomer(fName, lName, phone, email, description);
      
+     textFName.setText(null);
+     textLName.setText(null);
+     textPhone.setText(null);
+     textEmail.setText(null);
+     textDescription.setText(null);
  
  
  }
