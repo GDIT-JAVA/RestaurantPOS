@@ -52,7 +52,7 @@ public class MenuAddFrame extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         lstFoodTypes = new javax.swing.JList<>();
 
-        setTitle("Add New Customer");
+        setTitle("Add New Menu");
 
         lblDescription.setText("Description");
 
