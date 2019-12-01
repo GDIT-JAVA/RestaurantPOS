@@ -5,13 +5,14 @@
  */
 package Views.Setting;
 
+import java.awt.BorderLayout;
+import java.awt.GridLayout;
+
 /**
  *
  * @author PPuarat
  */
 public class Setting extends javax.swing.JPanel {
-
-    
 
     /**
      * Creates new form Settings
@@ -40,17 +41,7 @@ public class Setting extends javax.swing.JPanel {
         dataPanel.setBackground(new java.awt.Color(187, 187, 187));
         dataPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         dataPanel.setPreferredSize(new java.awt.Dimension(1500, 1500));
-
-        javax.swing.GroupLayout dataPanelLayout = new javax.swing.GroupLayout(dataPanel);
-        dataPanel.setLayout(dataPanelLayout);
-        dataPanelLayout.setHorizontalGroup(
-            dataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 775, Short.MAX_VALUE)
-        );
-        dataPanelLayout.setVerticalGroup(
-            dataPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 529, Short.MAX_VALUE)
-        );
+        dataPanel.setLayout(new javax.swing.BoxLayout(dataPanel, javax.swing.BoxLayout.LINE_AXIS));
 
         optionsPanel.setBackground(new java.awt.Color(180, 180, 180));
         optionsPanel.setPreferredSize(new java.awt.Dimension(700, 700));
@@ -139,24 +130,47 @@ public class Setting extends javax.swing.JPanel {
                         .addGap(400, 400, 400)))
                 .addGap(0, 12, Short.MAX_VALUE))
         );
-
-        jLabel1.getAccessibleContext().setAccessibleName("");
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCustomersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCustomersActionPerformed
         // TODO add your handling code here:
+        CustomerPanel obj = new CustomerPanel();
+        //setLayout(new BorderLayout());
+        dataPanel.removeAll();
+        dataPanel.add(obj);//3rd argument is index
+        dataPanel.repaint();
+        dataPanel.revalidate();
     }//GEN-LAST:event_btnCustomersActionPerformed
 
     private void btnUsersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUsersActionPerformed
         // TODO add your handling code here:
+        UserPanel obj = new UserPanel();
+        //setLayout(new BorderLayout());
+        dataPanel.removeAll();
+        dataPanel.add(obj);//3rd argument is index
+        dataPanel.repaint();
+        dataPanel.revalidate();
     }//GEN-LAST:event_btnUsersActionPerformed
 
     private void btnCategoriesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCategoriesActionPerformed
         // TODO add your handling code here:
+        CategoriesPanel obj = new CategoriesPanel();
+        //setLayout(new BorderLayout());
+        dataPanel.removeAll();
+        dataPanel.add(obj);//3rd argument is index
+        dataPanel.repaint();
+        dataPanel.revalidate();
     }//GEN-LAST:event_btnCategoriesActionPerformed
 
     private void btnMenufoodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenufoodActionPerformed
         // TODO add your handling code here:
+
+        MenuPanel obj = new MenuPanel();
+        //setLayout(new BorderLayout());
+        dataPanel.removeAll();
+        dataPanel.add(obj);//3rd argument is index
+        dataPanel.repaint();
+        dataPanel.revalidate();
     }//GEN-LAST:event_btnMenufoodActionPerformed
 
 
