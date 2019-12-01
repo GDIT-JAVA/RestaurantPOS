@@ -116,6 +116,7 @@ public class CategoriesPanel extends javax.swing.JPanel {
 
     private void BtnAddCategoriesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAddCategoriesActionPerformed
         // TODO add your handling code here:
+         new CategoriesAddFrame().setVisible(true);
     }//GEN-LAST:event_BtnAddCategoriesActionPerformed
     
     //Init the table with a default table

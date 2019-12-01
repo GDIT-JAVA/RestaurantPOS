@@ -10,7 +10,9 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -116,6 +118,43 @@ public class UserDAO {
             PostgreSQLConnection.close(conn, stmt);
         }
         return user;
+    }
+
+    
+    public void addUser(String user, String fName, String lName, String phone, String email, String password){
+        
+        LocalDate localDate = LocalDate.now();
+        
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        try {
+
+            conn = PostgreSQLConnection.connect();
+
+            String SQL = "INSERT INTO public.users (user_name,first_name,last_name,phone,email,password,created_at,is_active) VALUES"
+                    + " (?,?,?,?,?,?,?,?); ";
+
+            stmt = conn.prepareStatement(SQL);
+            
+            stmt.setString(1, user);
+            stmt.setString(2, fName);
+            stmt.setString(3, lName);
+            stmt.setString(4, phone);
+            stmt.setString(5, email);
+            stmt.setString(6, password);
+            stmt.setObject(7, localDate);
+            stmt.setBoolean(8, true);
+            
+            stmt.executeUpdate();
+            
+        }
+        catch (SQLException e) {
+            System.err.println(e.toString());
+            JOptionPane.showMessageDialog(null, 
+                    e.toString());
+        } finally {
+            PostgreSQLConnection.close(conn, stmt);
+        }
     }
 
     private ArrayList<User> map(ResultSet rs) throws SQLException {

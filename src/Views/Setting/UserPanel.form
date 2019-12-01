@@ -38,7 +38,6 @@
                       <Component id="BtnUpdateUSer" min="-2" pref="83" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="BtnDeleteUSer" min="-2" pref="77" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="4" max="-2" attributes="0"/>
                   </Group>
                   <Component id="jScrollPane1" min="-2" pref="840" max="-2" attributes="0"/>
               </Group>

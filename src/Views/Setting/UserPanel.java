@@ -14,7 +14,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author rodrigo.garcia
+ * @author patricia.garcia
  */
 public class UserPanel extends javax.swing.JPanel {
 
@@ -79,8 +79,7 @@ public class UserPanel extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(BtnUpdateUSer, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(BtnDeleteUSer, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(4, 4, 4))
+                        .addComponent(BtnDeleteUSer, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 840, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(621, Short.MAX_VALUE))
         );
@@ -100,6 +99,7 @@ public class UserPanel extends javax.swing.JPanel {
 
     private void BtnAddUSerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAddUSerActionPerformed
         // TODO add your handling code here:
+        new UserAddFrame().setVisible(true);
     }//GEN-LAST:event_BtnAddUSerActionPerformed
 
     private void BtnUpdateUSerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnUpdateUSerActionPerformed

@@ -12,7 +12,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -143,5 +145,47 @@ public class FoodDAO {
         }
 
         return null;
+    }
+    
+    private void addMenu(String foodName, String description, String price, String category ){
+         LocalDate localDate = LocalDate.now();
+        
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        try {
+
+            conn = PostgreSQLConnection.connect();
+
+            String SQL = "INSERT INTO public.customers (food_name,description,price,type_id) VALUES"
+                    + " (?,?,?,?,?,?,?); ";
+
+            stmt = conn.prepareStatement(SQL);
+            
+            stmt.setString(1, foodName);
+            stmt.setString(2, description);
+            stmt.setString(3, price);
+            stmt.setString(4, category);
+     
+            
+            stmt.executeUpdate();
+            
+        }
+        catch (SQLException e) {
+            System.err.println(e.toString());
+            JOptionPane.showMessageDialog(null, 
+                    e.toString());
+        } finally {
+            PostgreSQLConnection.close(conn, stmt);
+        }
+    
+    
+    
+    
+    
+    
+    }
+
+    public void addFood(String foodName, String description, String price, String category) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

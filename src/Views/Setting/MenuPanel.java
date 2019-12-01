@@ -15,7 +15,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author rodrigo.garcia
+ * @author patricia.garcia
  */
 public class MenuPanel extends javax.swing.JPanel {
 
@@ -97,6 +97,7 @@ public class MenuPanel extends javax.swing.JPanel {
 
     private void BtnAddMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAddMenuActionPerformed
         // TODO add your handling code here:
+        new UserAddFrame().setVisible(true);
     }//GEN-LAST:event_BtnAddMenuActionPerformed
 
 public void init(){
