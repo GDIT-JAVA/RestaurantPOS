@@ -78,7 +78,7 @@ public class FoodDAO {
         return foods;
     }
     
-      public void addMenu(String foodName, String description, String price, String category){
+      public void addMenu(String foodName, String description, String price, long category){
         
         LocalDate localDate = LocalDate.now();
         
@@ -97,7 +97,7 @@ public class FoodDAO {
             stmt.setObject(3, localDate);
             stmt.setDouble(4, Double.parseDouble(price));
             stmt.setBoolean(5, true);
-            stmt.setString(6, category);
+            stmt.setLong(6, category);
     
             
             stmt.executeUpdate();

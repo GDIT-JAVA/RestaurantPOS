@@ -91,15 +91,11 @@ public class MenuAddFrame extends javax.swing.JFrame {
                         .addComponent(btnClose))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblDescription)
-                                .addGap(30, 30, 30))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblPrice)
-                                    .addComponent(lblFood)
-                                    .addComponent(lblCategory))
-                                .addGap(25, 25, 25)))
+                            .addComponent(lblDescription)
+                            .addComponent(lblPrice)
+                            .addComponent(lblFood)
+                            .addComponent(lblCategory))
+                        .addGap(29, 29, 29)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(txtDescription, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 375, Short.MAX_VALUE)
                             .addComponent(txtPrice, javax.swing.GroupLayout.Alignment.LEADING)
@@ -159,14 +155,17 @@ public class MenuAddFrame extends javax.swing.JFrame {
      String foodName = txtFood.getText();
      String description = txtDescription.getText();
      String price = txtPrice.getText();
-     String category = lstFoodTypes.getSelectedValue();
+     
+     System.out.println("fernando: " + lstFoodTypes.getSelectedValue());
+     
+     long category = lstFoodTypes.getSelectedValue();
      
      FoodTypeDAO foodTypeDao = new FoodTypeDAO();
      ArrayList<FoodType> foodTypes = new ArrayList<>();
      foodTypes = foodTypeDao.searchAll();
      FoodDAO foodDao = new FoodDAO(foodTypes);
              
-     foodDao.addMenu(foodName, description, price, category);
+    foodDao.addMenu(foodName, description, price, category);
      
      txtFood.setText(null);
      txtDescription.setText(null);
@@ -187,7 +186,6 @@ public class MenuAddFrame extends javax.swing.JFrame {
      for(int i = 0; i < foodTypes.size() ; i++){
      
          defaultListModel.addElement(foodTypes.get(i).getId());
-     
      }
      
      lstFoodTypes.setModel(defaultListModel);
@@ -204,7 +202,7 @@ public class MenuAddFrame extends javax.swing.JFrame {
     private javax.swing.JLabel lblDescription;
     private javax.swing.JLabel lblFood;
     private javax.swing.JLabel lblPrice;
-    private javax.swing.JList<String> lstFoodTypes;
+    private javax.swing.JList<Long> lstFoodTypes;
     private javax.swing.JTextField txtDescription;
     private javax.swing.JTextField txtFood;
     private javax.swing.JTextField txtPrice;

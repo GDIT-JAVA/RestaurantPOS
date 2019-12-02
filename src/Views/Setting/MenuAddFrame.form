@@ -144,7 +144,7 @@
       <SubComponents>
         <Component class="javax.swing.JList" name="lstFoodTypes">
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Long&gt;"/>
           </AuxValues>
         </Component>
       </SubComponents>
