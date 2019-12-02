@@ -36,14 +36,8 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
+                  <Component id="BtnAddCustomer" min="-2" pref="75" max="-2" attributes="0"/>
                   <Component id="jScrollPane1" min="-2" pref="840" max="-2" attributes="0"/>
-                  <Group type="102" attributes="0">
-                      <Component id="BtnAddCustomer" min="-2" pref="75" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="BtnUpdateCustomer" min="-2" pref="83" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="BtnDeleteCustomer" min="-2" pref="77" max="-2" attributes="0"/>
-                  </Group>
               </Group>
               <EmptySpace pref="101" max="32767" attributes="0"/>
           </Group>
@@ -54,12 +48,8 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="473" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="BtnDeleteCustomer" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
-                  <Component id="BtnUpdateCustomer" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
-                  <Component id="BtnAddCustomer" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
-              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="BtnAddCustomer" min="-2" pref="40" max="-2" attributes="0"/>
               <EmptySpace pref="52" max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -92,19 +82,6 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnAddCustomerActionPerformed"/>
       </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="BtnUpdateCustomer">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Update"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnUpdateCustomerActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="BtnDeleteCustomer">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Delete"/>
-      </Properties>
     </Component>
   </SubComponents>
 </Form>

@@ -27,6 +27,7 @@ public class CustomerDAO {
     private final static String TABLE = "customers";
     DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");  
     Date date = Calendar.getInstance().getTime();
+    private boolean isSuccess;
     
 
     public ArrayList<Customer> searchAll() {
@@ -83,8 +84,7 @@ public class CustomerDAO {
             stmt.setObject(6, localDate);
             stmt.setBoolean(7, true);
             
-            stmt.executeUpdate();
-            
+   
         }
         catch (SQLException e) {
             System.err.println(e.toString());
@@ -93,6 +93,7 @@ public class CustomerDAO {
         } finally {
             PostgreSQLConnection.close(conn, stmt);
         }
+
     }
 
     public Customer searchById(long id) {

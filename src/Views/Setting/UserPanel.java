@@ -39,8 +39,6 @@ public class UserPanel extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         tableUser = new javax.swing.JTable();
         javax.swing.JButton BtnAddUSer = new javax.swing.JButton();
-        BtnUpdateUSer = new javax.swing.JButton();
-        BtnDeleteUSer = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 204));
         setBorder(javax.swing.BorderFactory.createTitledBorder(""));
@@ -58,15 +56,6 @@ public class UserPanel extends javax.swing.JPanel {
             }
         });
 
-        BtnUpdateUSer.setText("Update");
-        BtnUpdateUSer.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnUpdateUSerActionPerformed(evt);
-            }
-        });
-
-        BtnDeleteUSer.setText("Delete");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -74,12 +63,7 @@ public class UserPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(BtnAddUSer, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(BtnUpdateUSer, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(BtnDeleteUSer, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(BtnAddUSer, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 840, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(621, Short.MAX_VALUE))
         );
@@ -89,10 +73,7 @@ public class UserPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 473, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(9, 9, 9)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(BtnDeleteUSer, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BtnUpdateUSer, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BtnAddUSer, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(BtnAddUSer, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(957, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -101,10 +82,6 @@ public class UserPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         new UserAddFrame().setVisible(true);
     }//GEN-LAST:event_BtnAddUSerActionPerformed
-
-    private void BtnUpdateUSerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnUpdateUSerActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_BtnUpdateUSerActionPerformed
 
     
         //Init the table with a default table
@@ -176,8 +153,6 @@ public class UserPanel extends javax.swing.JPanel {
 DefaultTableModel defaultTableModel;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton BtnDeleteUSer;
-    private javax.swing.JButton BtnUpdateUSer;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tableUser;
     // End of variables declaration//GEN-END:variables

@@ -42,13 +42,7 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
-                  <Group type="102" attributes="0">
-                      <Component id="BtnAddCategories" min="-2" pref="75" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
-                      <Component id="BtnUpdateCategories" min="-2" pref="83" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="BtnDeleteCategories" min="-2" pref="77" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="BtnAddCategories" min="-2" pref="75" max="-2" attributes="0"/>
                   <Component id="jScrollPane2" min="-2" pref="839" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="102" max="32767" attributes="0"/>
@@ -60,12 +54,8 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
               <Component id="jScrollPane2" min="-2" pref="473" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="BtnAddCategories" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
-                  <Component id="BtnUpdateCategories" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
-                  <Component id="BtnDeleteCategories" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
-              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="BtnAddCategories" min="-2" pref="40" max="-2" attributes="0"/>
               <EmptySpace pref="52" max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -100,23 +90,6 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnAddCategoriesActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="BtnUpdateCategories">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Update"/>
-        <Property name="toolTipText" type="java.lang.String" value=""/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnUpdateCategoriesActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="BtnDeleteCategories">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Delete"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnDeleteCategoriesActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

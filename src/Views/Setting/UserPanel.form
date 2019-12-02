@@ -32,13 +32,7 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
-                  <Group type="102" attributes="0">
-                      <Component id="BtnAddUSer" min="-2" pref="75" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="BtnUpdateUSer" min="-2" pref="83" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="BtnDeleteUSer" min="-2" pref="77" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="BtnAddUSer" min="-2" pref="75" max="-2" attributes="0"/>
                   <Component id="jScrollPane1" min="-2" pref="840" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="621" max="32767" attributes="0"/>
@@ -51,11 +45,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="473" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="BtnDeleteUSer" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
-                  <Component id="BtnUpdateUSer" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
-                  <Component id="BtnAddUSer" alignment="3" min="-2" pref="40" max="-2" attributes="0"/>
-              </Group>
+              <Component id="BtnAddUSer" min="-2" pref="40" max="-2" attributes="0"/>
               <EmptySpace pref="957" max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -92,19 +82,6 @@
         <AuxValue name="JavaCodeGenerator_VariableLocal" type="java.lang.Boolean" value="true"/>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="0"/>
       </AuxValues>
-    </Component>
-    <Component class="javax.swing.JButton" name="BtnUpdateUSer">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Update"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BtnUpdateUSerActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="BtnDeleteUSer">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Delete"/>
-      </Properties>
     </Component>
   </SubComponents>
 </Form>

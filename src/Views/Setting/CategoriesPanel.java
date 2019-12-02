@@ -37,8 +37,6 @@ public class CategoriesPanel extends javax.swing.JPanel {
         jScrollPane2 = new javax.swing.JScrollPane();
         tableCategories = new javax.swing.JTable();
         BtnAddCategories = new javax.swing.JButton();
-        BtnUpdateCategories = new javax.swing.JButton();
-        BtnDeleteCategories = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 204));
         setBorder(javax.swing.BorderFactory.createTitledBorder(""));
@@ -61,21 +59,6 @@ public class CategoriesPanel extends javax.swing.JPanel {
             }
         });
 
-        BtnUpdateCategories.setText("Update");
-        BtnUpdateCategories.setToolTipText("");
-        BtnUpdateCategories.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnUpdateCategoriesActionPerformed(evt);
-            }
-        });
-
-        BtnDeleteCategories.setText("Delete");
-        BtnDeleteCategories.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnDeleteCategoriesActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -83,12 +66,7 @@ public class CategoriesPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(BtnAddCategories, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(6, 6, 6)
-                        .addComponent(BtnUpdateCategories, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(BtnDeleteCategories, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(BtnAddCategories, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 839, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(102, Short.MAX_VALUE))
         );
@@ -97,22 +75,11 @@ public class CategoriesPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 473, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(9, 9, 9)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(BtnAddCategories, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BtnUpdateCategories, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BtnDeleteCategories, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(BtnAddCategories, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(52, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void BtnUpdateCategoriesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnUpdateCategoriesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_BtnUpdateCategoriesActionPerformed
-
-    private void BtnDeleteCategoriesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnDeleteCategoriesActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_BtnDeleteCategoriesActionPerformed
 
     private void BtnAddCategoriesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAddCategoriesActionPerformed
         // TODO add your handling code here:
@@ -181,8 +148,6 @@ DefaultTableModel defaultTableModel;
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnAddCategories;
-    private javax.swing.JButton BtnDeleteCategories;
-    private javax.swing.JButton BtnUpdateCategories;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable tableCategories;
     // End of variables declaration//GEN-END:variables
