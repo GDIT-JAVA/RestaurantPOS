@@ -66,7 +66,8 @@ public class OrderManagement extends javax.swing.JPanel {
     private void displayOrder() {
         ArrayList<Order> orders;
         orders = orderManagementCon.initOrderManagement();
-
+        
+        //generate orders buttons
         orders.stream().map((order) -> {
             JButton orderBtn = new OrderListButton(order);
             

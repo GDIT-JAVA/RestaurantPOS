@@ -148,11 +148,14 @@ public class OrderDetail extends javax.swing.JPanel {
         add(detailPanel);
 
         foodTypePanel.setBackground(new java.awt.Color(255, 255, 255));
+        foodTypePanel.setMinimumSize(new java.awt.Dimension(200, 0));
         foodTypePanel.setPreferredSize(new java.awt.Dimension(200, 0));
         foodTypePanel.setLayout(new java.awt.GridLayout(0, 1, 5, 10));
         add(foodTypePanel);
 
         foodPanel.setBackground(new java.awt.Color(204, 204, 204));
+        foodPanel.setMaximumSize(new java.awt.Dimension(500, 32767));
+        foodPanel.setMinimumSize(new java.awt.Dimension(500, 0));
         foodPanel.setPreferredSize(new java.awt.Dimension(500, 0));
         foodPanel.setLayout(new java.awt.GridLayout(1, 1));
         add(foodPanel);
